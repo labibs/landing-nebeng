@@ -475,9 +475,9 @@ export default function Home() {
             <a href="#">Terms of Service</a>
           </div>
         </div>
-        <div className={styles.footerBottom}>
+        <div className={styles.footerBottom} onClick={() => window.open("https://sakte.id")>
           <p className={styles.footerCopy}>
-            © 2026 Numpak Team · PT. Satya Karya Technosolution
+            © 2026 sakte.id · PT. Satya Karya Technosolution
           </p>
           <div className={styles.footerBadge}>numpak.vercel.app</div>
         </div>
