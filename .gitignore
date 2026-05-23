@@ -1,0 +1,22 @@
+# dependencies
+node_modules
+
+# nextjs
+.next
+
+# production
+out
+
+# macOS
+.DS_Store
+
+# logs
+npm-debug.log*
+
+# env
+.env
+.env.local
+.env.production
+
+# typescript
+*.tsbuildinfo
