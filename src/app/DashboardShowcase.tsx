@@ -83,7 +83,7 @@ export default function DashboardShowcase() {
   const [direction, setDirection] = useState("next");
 
   const go = useCallback(
-    (idx) => {
+    (idx: number) => {
       if (animating || idx === active) return;
       setDirection(idx > active ? "next" : "prev");
       setAnimating(true);
