@@ -15,8 +15,7 @@ const slides = [
       "⚡ Rata-rata deal dalam 3 menit",
       "📍 Filter by kota asal & tujuan",
     ],
-    // Slot for actual screenshot — replace src with your image path/import
-    imgSrc: "/screenshots/ss-feeed.png",
+    imgSrc: "/screenshots/ss-fed.png",
     imgAlt: "Feed Dalam Perjalanan Numpak",
     accent: "#0d9488",
   },
@@ -30,7 +29,7 @@ const slides = [
       "💸 Ongkos transparan sejak awal — Rp 20.000",
       "🤝 Tombol DEAL langsung dari feed",
     ],
-    imgSrc: "/screenshots/ss-rute.png", // ✅ gambar nyata
+    imgSrc: "/screenshots/ss-rutee.png",
     imgAlt: "Detail Rute Perjalanan Numpak",
     accent: "#3b82f6",
     realImg: true,
@@ -38,14 +37,14 @@ const slides = [
   {
     tag: "Fitur 03",
     title: "Marketplace Outlet — Nitip Beliin",
-    subtitle: "8 outlet aktif, belanja titip ke kurir",
-    desc: "Halaman Market menampilkan outlet pilihan dengan kategori Makanan, Obat, Sembako, dan lainnya. Takumi-ya Express Sushi sudah terdaftar lengkap dengan promo ongkir dan label 'Bisa nitip'.",
+    subtitle: "Berbagai outlet aktif, belanja titip ke kurir",
+    desc: "Halaman Market menampilkan outlet pilihan dengan kategori Makanan, Obat, Sembako, dan lainnya. Berbagai merchant populer sudah terdaftar lengkap dengan promo ongkir dan label 'Bisa nitip'.",
     bullets: [
-      "🏪 8 outlet aktif terdaftar",
+      "🏪 Berbagai outlet aktif terdaftar",
       "🍱 Filter kategori: Makanan, Obat, Sembako",
-      "📢 Promo ongkir & diskon 10% live",
+      "📢 Promo ongkir & diskon menarik",
     ],
-    imgSrc: "/screenshots/ss-market.jpeg", // ✅ gambar nyata
+    imgSrc: "/screenshots/ss-market.jpeg",
     imgAlt: "Marketplace Outlet Numpak",
     accent: "#f59e0b",
     realImg: true,
@@ -54,7 +53,7 @@ const slides = [
     tag: "Fitur 04",
     title: "Chat In-App & Konfirmasi Deal",
     subtitle: "Nego tanpa keluar platform",
-    desc: "7+ pengguna aktif sudah berinteraksi lewat chat in-app Numpak. Negosiasi harga, koordinasi titik jemput, hingga konfirmasi barang — semua dalam satu tempat yang aman.",
+    desc: "Pengguna dapat berinteraksi lewat chat in-app Numpak. Negosiasi harga, koordinasi titik jemput, hingga konfirmasi barang — semua dalam satu tempat yang aman.",
     bullets: [
       "💬 Chat langsung antar traveler & pengirim",
       "🔔 Notifikasi deal offer real-time",
@@ -68,7 +67,7 @@ const slides = [
     tag: "Fitur 05",
     title: "Transaksi Terlacak & Terlindungi",
     subtitle: "Escrow payment, dana aman",
-    desc: "3 transaksi selesai dengan rute nyata: Cipari→Purwokerto, Purwokerto→Kawunganten, dan lebih banyak lagi. Setiap transaksi punya status jelas — Menunggu Bayar, Ready to Ship, atau Dibatalkan.",
+    desc: "Contoh transaksi dengan rute populer: Area A→Area B, Kota X→Kota Y, dan lebih banyak lagi. Setiap transaksi punya status jelas — Menunggu Bayar, Ready to Ship, atau Dibatalkan.",
     bullets: [
       "💳 Escrow: dana cair setelah konfirmasi",
       "📦 Label OWNER & CARRIER per transaksi",
@@ -80,7 +79,7 @@ const slides = [
   },
   {
     tag: "Fitur 06",
-    title: "8 Fitur dalam Satu Platform",
+    title: "Fitur dalam Satu Platform",
     subtitle: "Ekosistem peer-to-peer terlengkap",
     desc: "Dari Nitip Bawain, Nitip Beliin, Nyari Boncengan, sampai Jualan Keliling — semua tersedia di satu tampilan. Platform yang adaptif untuk berbagai kebutuhan mobilitas komunitas.",
     bullets: [
@@ -89,14 +88,14 @@ const slides = [
       "🚛 Dalam Perjalanan & Jualan Keliling",
     ],
     imgSrc: "/screenshots/ss-features.jpeg",
-    imgAlt: "Menu 8 Fitur Numpak",
+    imgAlt: "Menu Fitur Numpak",
     accent: "#8b5cf6",
   },
   {
     tag: "Fitur 07",
     title: "Keranjang Nitip — Titip Belanja Lintas Kota",
     subtitle: "Belanja dari toko manapun via kurir",
-    desc: "Mau pesan Beef Teriyaki dari Takumi-ya Express Sushi di Purwokerto tapi kamu di luar kota? Tambahkan ke Keranjang Nitip, temukan kurir yang lewat, dan barang sampai ke tanganmu.",
+    desc: "Mau pesan makanan favorit dari merchant populer di kotamu tapi kamu sedang sibuk? Tambahkan ke Keranjang Nitip, temukan kurir yang lewat, dan barang sampai ke tanganmu.",
     bullets: [
       "🛒 Keranjang nitip multi-outlet",
       "🍱 Nitip ke Kurir terdekat",
@@ -110,10 +109,10 @@ const slides = [
     tag: "Fitur 08",
     title: "Profil Verified Pro & Sistem Reputasi",
     subtitle: "Trust by design, bukan sekadar janji",
-    desc: "Labib S. — dengan 1.2k review dan badge Verified Pro — adalah bukti nyata sistem reputasi Numpak berjalan. XP, post count, dan galeri aktivitas membangun kepercayaan komunitas organik.",
+    desc: "Sistem reputasi Numpak memastikan setiap profil memiliki kredibilitas yang terverifikasi. XP, jumlah postingan, dan galeri aktivitas membangun kepercayaan komunitas secara organik.",
     bullets: [
       "⭐ Badge Verified Pro berbasis XP",
-      "📈 1.2k review aktif terlacak",
+      "📈 Review aktif terlacak",
       "🖼️ Galeri aktivitas transparan",
     ],
     imgSrc: "/screenshots/ss-profile.jpeg",
@@ -124,7 +123,7 @@ const slides = [
     tag: "Fitur 09",
     title: "Outlet Saya — Sistem Outlet 3 Model",
     subtitle: "Warung offline masuk ekosistem digital",
-    desc: "Inovasi unik Numpak: outlet bisa didaftarkan oleh Kurir, Pemilik, atau Customer setia. 8 outlet sudah aktif — warung yang tidak melek digital pun bisa ikut ekosistem.",
+    desc: "Inovasi unik Numpak: outlet bisa didaftarkan oleh Kurir, Pemilik, atau Customer setia. Berbagai outlet telah bergabung — warung konvensional pun kini bisa terhubung ke ekosistem digital.",
     bullets: [
       "🏪 3 model: Kurir / Pemilik / Customer",
       "🛍️ Kelola produk & harga langsung",
@@ -157,7 +156,6 @@ export default function ScreenshotShowcase() {
   const prev = () => go(active === 0 ? slides.length - 1 : active - 1);
   const next = () => go(active === slides.length - 1 ? 0 : active + 1);
 
-  // Auto-advance
   useEffect(() => {
     const t = setInterval(() => {
       go(active === slides.length - 1 ? 0 : active + 1);
@@ -169,21 +167,19 @@ export default function ScreenshotShowcase() {
 
   return (
     <section className={styles.section} id="screenshots">
-      {/* Section header */}
       <div className={styles.header}>
-        <div className={styles.eyebrow}>Tangkapan Layar Nyata</div>
+        <div className={styles.eyebrow}>Eksplorasi Antarmuka</div>
         <h2 className={styles.title}>
-          Bukan mockup. <span className={styles.accent}>Platform live.</span>
+          Prototype Interaktif.{" "}
+          <span className={styles.accent}>Siap diuji.</span>
         </h2>
         <p className={styles.desc}>
-          Setiap layar di bawah adalah hasil tangkapan dari numpak.vercel.app —
-          pengguna nyata, transaksi nyata, data nyata.
+          Setiap layar di bawah adalah gambaran alur kerja aplikasi — dari
+          pencarian rute hingga penyelesaian transaksi.
         </p>
       </div>
 
-      {/* Main carousel */}
       <div className={styles.carousel}>
-        {/* LEFT — text */}
         <div
           className={`${styles.textPane} ${animating ? (direction === "next" ? styles.exitLeft : styles.exitRight) : styles.enter}`}
           style={{ "--accent": slide.accent } as React.CSSProperties}
@@ -205,7 +201,6 @@ export default function ScreenshotShowcase() {
             ))}
           </ul>
 
-          {/* Nav */}
           <div className={styles.nav}>
             <button
               className={styles.navBtn}
@@ -239,27 +234,17 @@ export default function ScreenshotShowcase() {
           </div>
         </div>
 
-        {/* RIGHT — phone mockup */}
         <div className={styles.phoneWrap}>
-          {/* Decorative blobs */}
           <div className={styles.blob1} style={{ background: slide.accent }} />
           <div className={styles.blob2} style={{ background: slide.accent }} />
 
           <div className={styles.phone}>
-            {/* Phone chrome */}
             <div className={styles.phoneChromeTop}>
               <div className={styles.phoneCamera} />
             </div>
             <div
               className={`${styles.phoneScreen} ${animating ? (direction === "next" ? styles.screenExitLeft : styles.screenExitRight) : styles.screenEnter}`}
             >
-              {/*
-                Replace the <div> below with an actual <Image> tag from next/image
-                once you wire up the real screenshot paths, e.g.:
-                <Image src={slide.imgSrc} alt={slide.imgAlt} fill style={{ objectFit: "cover" }} />
-
-                For now we show a labelled placeholder that visually maps to each slide.
-              */}
               <Image
                 src={slide.imgSrc}
                 alt={slide.imgAlt}

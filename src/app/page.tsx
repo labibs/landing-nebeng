@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
 import styles from "./page.module.css";
 import ScreenshotShowcase from "./ScreenshotShowcase";
 import DashboardShowcase from "./DashboardShowcase";
@@ -8,6 +9,27 @@ import Image from "next/image";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const scrollTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsNavVisible(true);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+
+      // Auto-hide after 1.5 seconds of NO scrolling
+      scrollTimeoutRef.current = setTimeout(() => {
+        if (window.scrollY > 20) {
+          setIsNavVisible(false);
+        }
+      }, 1500);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -50,6 +72,7 @@ export default function Home() {
 
   const menuItems = [
     { name: "Home", href: "#" },
+    { name: "Preview App", href: "#screenshots" },
     { name: "Fitur Platform", href: "#showcase" },
     { name: "Admin Dashboard", href: "#dashboard" },
     { name: "Cara Kerja", href: "#how" },
@@ -59,10 +82,12 @@ export default function Home() {
 
   return (
     <>
-      <nav className={styles.nav}>
+      <nav
+        className={`${styles.nav} ${!isNavVisible && !isMenuOpen ? styles.navHidden : ""}`}
+      >
         <div className={styles.navLogo}>
           <Image
-            src="/logo.png"
+            src="/logoo.png"
             alt="Numpak Logo"
             width={160}
             height={46}
@@ -108,65 +133,76 @@ export default function Home() {
       </div>
 
       <header className={styles.hero}>
-        <div data-animate className={styles.heroLeft}>
-          <div
-            className={styles.heroBadge}
-            style={{ cursor: "pointer" }}
-            onClick={() => window.open("https://sakte.id")}
-          >
-            <i></i> SAKTE.ID · TEAM ID : P0190
-          </div>
-          <h2 className={styles.heroH1}>
-            Optimalkan Mobilitas, <br />
-            <span className={styles.accent}>Sederhanakan Logistik.</span>
-          </h2>
-          <p className={styles.heroDesc}>
-            Numpak memobilisasi perjalanan komunitas untuk pengiriman yang lebih
-            cepat, hemat, dan terpercaya melalui arsitektur marketplace berbasis
-            kepercayaan (Escrow & Asuransi OJK).
-          </p>
-          <div className={styles.heroButtons}>
-            <a href="https://numpak.vercel.app" className={styles.btnPrimary}>
-              Coba Sekarang →
-            </a>
-            <a href="#showcase" className={styles.btnSecondary}>
-              Pelajari Fitur
-            </a>
-          </div>
-          <div className={styles.heroTrust}>
-            <div className={styles.trustAvatars}>
-              <span>LS</span>
-              <span>AY</span>
-              <span>RS</span>
-            </div>
-            <div className={styles.trustText}>
-              Dipercaya oleh komunitas <strong>UMKM & Traveler</strong> di
-              Purwokerto
-            </div>
-          </div>
-        </div>
-
-        <div
-          data-animate
-          className={styles.heroVisual}
-          style={{ transitionDelay: "0.2s" }}
-        >
+        <div className={styles.heroBg}>
           <Image
-            src="/screenshots/hero1.png"
-            alt="Hand holding Numpak App"
-            width={1000}
-            height={1200}
-            className={styles.handImage}
+            src="/heroo.png"
+            alt="Numpak Hero Background"
+            fill
+            style={{ objectFit: "cover" }}
             priority
           />
+          <div className={styles.heroOverlay}></div>
+        </div>
+
+        <div data-animate className={styles.heroContent}>
+          <div className={styles.heroLeft}>
+            <div
+              className={styles.heroBadge}
+              style={{ cursor: "pointer" }}
+              onClick={() => window.open("https://sakte.id")}
+            >
+              <i></i> SAKTE.ID · TEAM ID : P0190
+            </div>
+            {/*<h2 className={styles.heroH1}>
+              Optimalkan Mobilitas, <br />
+              <span className={styles.accent}>Sederhanakan Logistik.</span>
+            </h2>
+            <p className={styles.heroDesc}>
+              Numpak memobilisasi perjalanan komunitas untuk pengiriman yang
+              lebih cepat, hemat, dan terpercaya melalui arsitektur marketplace
+              berbasis kepercayaan (Escrow & Asuransi OJK).
+            </p>*/}
+            <div className={styles.heroButtons}>
+              <a href="https://numpak.vercel.app" className={styles.btnPrimary}>
+                Coba Sekarang →
+              </a>
+              <a href="#showcase" className={styles.btnSecondary}>
+                Pelajari Fitur
+              </a>
+            </div>
+            <div className={styles.heroTrust}>
+              <div className={styles.trustBadge}>
+                <div className={styles.trustIcon}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                </div>
+
+                <div className={styles.trustText}>
+                  Dipakai <strong>Traveler & UMKM</strong>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
       <div className={styles.trusted}>
         <div className={styles.trustedLabel}>Anchor Ecosystem</div>
         <div className={styles.trustedLogos}>
-          <span>UMKM Purwokerto</span>
-          <span>Mahasiswa UNSOED</span>
+          <span>Komunitas UMKM</span>
+          <span>Komunitas Mahasiswa</span>
           <span>Komunitas Traveler</span>
         </div>
       </div>
@@ -228,8 +264,8 @@ export default function Home() {
             <h3>Community-Driven</h3>
             <p>
               Mengaktifkan aset idle (kendaraan bergerak setiap hari) menjadi
-              infrastruktur logistik nyata tanpa investasi kendaraan baru — zero
-              incremental carbon footprint.
+              infrastruktur logistik efektif tanpa investasi kendaraan baru —
+              zero incremental carbon footprint.
             </p>
           </div>
         </div>
@@ -330,6 +366,7 @@ export default function Home() {
                   Premium Membership
                 </div>
                 <div className={styles.accBody}>
+                  {" "}
                   Rp 29.000/bulan untuk limit posting rute lebih banyak dan
                   prioritas tampil di feed. Target 10% MAU berlangganan sebagai
                   recurring revenue.
@@ -342,7 +379,7 @@ export default function Home() {
                 <div className={styles.accBody}>
                   Merchant dapat mempromosikan toko di feed seharga Rp
                   50.000–200.000 per promo per minggu untuk menjangkau lebih
-                  banyak kurir dan pelanggan.
+                  banyak kurir and pelanggan.
                 </div>
               </div>
             </div>
@@ -440,7 +477,7 @@ export default function Home() {
             </div>
             <p className={styles.footerDesc}>
               Platform logistik peer-to-peer berbasis komunitas traveler
-              Indonesia. Submission Digdaya × Hackathon 2026.
+              Indonesia. Pengembangan konsep & uji coba sistem 2026.
             </p>
             <div className={styles.footerSocials}>
               <a href="#" className={styles.socialLink}>
@@ -475,7 +512,10 @@ export default function Home() {
             <a href="#">Terms of Service</a>
           </div>
         </div>
-        <div className={styles.footerBottom} onClick={() => window.open("https://sakte.id")>
+        <div
+          className={styles.footerBottom}
+          onClick={() => window.open("https://sakte.id")}
+        >
           <p className={styles.footerCopy}>
             © 2026 sakte.id · PT. Satya Karya Technosolution
           </p>
