@@ -17,7 +17,7 @@ const slides = [
     ],
     // Slot for actual screenshot — replace src with your image path/import
     imgSrc: "/screenshots/ss-feeed.png",
-    imgAlt: "Feed Dalam Perjalanan Nebeng",
+    imgAlt: "Feed Dalam Perjalanan Numpak",
     accent: "#0d9488",
   },
   {
@@ -31,7 +31,7 @@ const slides = [
       "🤝 Tombol DEAL langsung dari feed",
     ],
     imgSrc: "/screenshots/ss-rute.png", // ✅ gambar nyata
-    imgAlt: "Detail Rute Perjalanan Nebeng",
+    imgAlt: "Detail Rute Perjalanan Numpak",
     accent: "#3b82f6",
     realImg: true,
   },
@@ -46,7 +46,7 @@ const slides = [
       "📢 Promo ongkir & diskon 10% live",
     ],
     imgSrc: "/screenshots/ss-market.jpeg", // ✅ gambar nyata
-    imgAlt: "Marketplace Outlet Nebeng",
+    imgAlt: "Marketplace Outlet Numpak",
     accent: "#f59e0b",
     realImg: true,
   },
@@ -54,14 +54,14 @@ const slides = [
     tag: "Fitur 04",
     title: "Chat In-App & Konfirmasi Deal",
     subtitle: "Nego tanpa keluar platform",
-    desc: "7+ pengguna aktif sudah berinteraksi lewat chat in-app Nebeng. Negosiasi harga, koordinasi titik jemput, hingga konfirmasi barang — semua dalam satu tempat yang aman.",
+    desc: "7+ pengguna aktif sudah berinteraksi lewat chat in-app Numpak. Negosiasi harga, koordinasi titik jemput, hingga konfirmasi barang — semua dalam satu tempat yang aman.",
     bullets: [
       "💬 Chat langsung antar traveler & pengirim",
       "🔔 Notifikasi deal offer real-time",
       "🔒 Riwayat chat tersimpan aman",
     ],
     imgSrc: "/screenshots/ss-chat.jpeg",
-    imgAlt: "Chat In-App Nebeng",
+    imgAlt: "Chat In-App Numpak",
     accent: "#3b82f6",
   },
   {
@@ -75,7 +75,7 @@ const slides = [
       "📊 Riwayat lengkap dengan ekspor PDF",
     ],
     imgSrc: "/screenshots/ss-transaction.jpeg",
-    imgAlt: "Halaman Transaksi Nebeng",
+    imgAlt: "Halaman Transaksi Numpak",
     accent: "#f59e0b",
   },
   {
@@ -89,7 +89,7 @@ const slides = [
       "🚛 Dalam Perjalanan & Jualan Keliling",
     ],
     imgSrc: "/screenshots/ss-features.jpeg",
-    imgAlt: "Menu 8 Fitur Nebeng",
+    imgAlt: "Menu 8 Fitur Numpak",
     accent: "#8b5cf6",
   },
   {
@@ -103,35 +103,35 @@ const slides = [
       "💰 Estimasi total transparan",
     ],
     imgSrc: "/screenshots/ss-deal.jpeg",
-    imgAlt: "Keranjang Nitip Nebeng",
+    imgAlt: "Keranjang Nitip Numpak",
     accent: "#0d9488",
   },
   {
     tag: "Fitur 08",
     title: "Profil Verified Pro & Sistem Reputasi",
     subtitle: "Trust by design, bukan sekadar janji",
-    desc: "Labib S. — dengan 1.2k review dan badge Verified Pro — adalah bukti nyata sistem reputasi Nebeng berjalan. XP, post count, dan galeri aktivitas membangun kepercayaan komunitas organik.",
+    desc: "Labib S. — dengan 1.2k review dan badge Verified Pro — adalah bukti nyata sistem reputasi Numpak berjalan. XP, post count, dan galeri aktivitas membangun kepercayaan komunitas organik.",
     bullets: [
       "⭐ Badge Verified Pro berbasis XP",
       "📈 1.2k review aktif terlacak",
       "🖼️ Galeri aktivitas transparan",
     ],
     imgSrc: "/screenshots/ss-profile.jpeg",
-    imgAlt: "Profil Verified Pro Nebeng",
+    imgAlt: "Profil Verified Pro Numpak",
     accent: "#f59e0b",
   },
   {
     tag: "Fitur 09",
     title: "Outlet Saya — Sistem Outlet 3 Model",
     subtitle: "Warung offline masuk ekosistem digital",
-    desc: "Inovasi unik Nebeng: outlet bisa didaftarkan oleh Kurir, Pemilik, atau Customer setia. 8 outlet sudah aktif — warung yang tidak melek digital pun bisa ikut ekosistem.",
+    desc: "Inovasi unik Numpak: outlet bisa didaftarkan oleh Kurir, Pemilik, atau Customer setia. 8 outlet sudah aktif — warung yang tidak melek digital pun bisa ikut ekosistem.",
     bullets: [
       "🏪 3 model: Kurir / Pemilik / Customer",
       "🛍️ Kelola produk & harga langsung",
       "📢 Slot promo Outlet Ads tersedia",
     ],
     imgSrc: "/screenshots/ss-outlet.jpeg",
-    imgAlt: "Outlet Saya Nebeng",
+    imgAlt: "Outlet Saya Numpak",
     accent: "#dc2626",
   },
 ];
@@ -176,7 +176,7 @@ export default function ScreenshotShowcase() {
           Bukan mockup. <span className={styles.accent}>Platform live.</span>
         </h2>
         <p className={styles.desc}>
-          Setiap layar di bawah adalah hasil tangkapan dari nebeng.vercel.app —
+          Setiap layar di bawah adalah hasil tangkapan dari numpak.vercel.app —
           pengguna nyata, transaksi nyata, data nyata.
         </p>
       </div>

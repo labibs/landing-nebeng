@@ -63,7 +63,7 @@ export default function Home() {
         <div className={styles.navLogo}>
           <Image
             src="/logo.png"
-            alt="Nebeng Logo"
+            alt="Numpak Logo"
             width={160}
             height={46}
             className={styles.logoImg}
@@ -101,7 +101,7 @@ export default function Home() {
         <button
           className={styles.navCta}
           style={{ marginTop: "40px" }}
-          onClick={() => window.open("https://nebeng.vercel.app")}
+          onClick={() => window.open("https://numpak.vercel.app")}
         >
           Coba Prototype
         </button>
@@ -121,12 +121,12 @@ export default function Home() {
             <span className={styles.accent}>Sederhanakan Logistik.</span>
           </h2>
           <p className={styles.heroDesc}>
-            Nebeng memobilisasi perjalanan komunitas untuk pengiriman yang lebih
+            Numpak memobilisasi perjalanan komunitas untuk pengiriman yang lebih
             cepat, hemat, dan terpercaya melalui arsitektur marketplace berbasis
             kepercayaan (Escrow & Asuransi OJK).
           </p>
           <div className={styles.heroButtons}>
-            <a href="https://nebeng.vercel.app" className={styles.btnPrimary}>
+            <a href="https://numpak.vercel.app" className={styles.btnPrimary}>
               Coba Sekarang →
             </a>
             <a href="#showcase" className={styles.btnSecondary}>
@@ -153,7 +153,7 @@ export default function Home() {
         >
           <Image
             src="/screenshots/hero1.png"
-            alt="Hand holding Nebeng App"
+            alt="Hand holding Numpak App"
             width={1000}
             height={1200}
             className={styles.handImage}
@@ -425,7 +425,7 @@ export default function Home() {
               <div className={styles.faqA}>
                 Inovasi inklusi digital dimana warung bisa didaftarkan oleh
                 Kurir, Pemilik, atau Customer agar masuk ke ekosistem logistik
-                digital Nebeng tanpa harus memiliki perangkat digital sendiri.
+                digital Numpak tanpa harus memiliki perangkat digital sendiri.
               </div>
             </div>
           </div>
@@ -436,7 +436,7 @@ export default function Home() {
         <div className={styles.footerInner}>
           <div>
             <div className={styles.footerBrand}>
-              NEBENG<span>™</span>
+              Numpak<span>™</span>
             </div>
             <p className={styles.footerDesc}>
               Platform logistik peer-to-peer berbasis komunitas traveler
@@ -464,7 +464,7 @@ export default function Home() {
             <h4>Resources</h4>
             <a href="#business">Model Bisnis</a>
             <a href="#faq">Pusat Bantuan</a>
-            <a href="https://nebeng.vercel.app">Live Demo</a>
+            <a href="https://numpak.vercel.app">Live Demo</a>
           </div>
           <div className={styles.footerCol}>
             <h4>Corporate</h4>
@@ -477,9 +477,9 @@ export default function Home() {
         </div>
         <div className={styles.footerBottom}>
           <p className={styles.footerCopy}>
-            © 2026 Nebeng Team · PT. Satya Karya Technosolution
+            © 2026 Numpak Team · PT. Satya Karya Technosolution
           </p>
-          <div className={styles.footerBadge}>nebeng.vercel.app</div>
+          <div className={styles.footerBadge}>numpak.vercel.app</div>
         </div>
       </footer>
     </>

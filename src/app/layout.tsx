@@ -15,8 +15,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Nebeng — Optimalkan Mobilitas, Sederhanakan Logistik",
-  description: "Platform logistik peer-to-peer berbasis komunitas traveler Indonesia.",
+  title: "Numpak — Optimalkan Mobilitas, Sederhanakan Logistik",
+  description:
+    "Platform logistik peer-to-peer berbasis komunitas traveler Indonesia.",
   icons: {
     icon: "/favicon.ico",
   },

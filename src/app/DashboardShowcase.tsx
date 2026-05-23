@@ -16,7 +16,7 @@ const slides = [
       "🔔 Akses cepat ke notifikasi & bantuan chat",
     ],
     imgSrc: "/screenshots/ss-dashboard-1.png",
-    imgAlt: "Dashboard Admin Nebeng",
+    imgAlt: "Dashboard Admin Numpak",
     accent: "#0d9488",
   },
   {
@@ -116,7 +116,7 @@ export default function DashboardShowcase() {
         </h2>
         <p className={styles.desc}>
           Sistem manajemen terpusat untuk memantau metrik platform, keamanan
-          transaksi, dan pertumbuhan ekosistem Nebeng secara efisien.
+          transaksi, dan pertumbuhan ekosistem Numpak secara efisien.
         </p>
       </div>
 
