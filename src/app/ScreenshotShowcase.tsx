@@ -7,12 +7,12 @@ import Image from "next/image";
 const slides = [
   {
     tag: "Fitur 01",
-    title: "Feed Perjalanan Real-Time",
-    subtitle: "Scroll rute aktif seperti TikTok",
-    desc: "Traveler memposting perjalanan aktif mereka ke feed. Pengirim tinggal scroll, temukan kurir yang searah, dan langsung deal — semuanya real-time tanpa perlu cari manual ke sana-sini.",
+    title: "Feed Dalam Perjalanan",
+    subtitle: "Temukan traveler yang searah",
+    desc: "Orang yang sedang berangkat memposting rutenya ke feed. Pengirim barang seperti Mba Ana tinggal mencari perjalanan Cilacap-Purwokerto yang sesuai hari ini, lalu lanjut ke chat dan deal.",
     bullets: [
       "🟢 Rute aktif tampil langsung di feed",
-      "⚡ Rata-rata deal dalam 3 menit",
+      "⚡ Cocok untuk kebutuhan time-sensitive",
       "📍 Filter by kota asal & tujuan",
     ],
     imgSrc: "/screenshots/ss-fedok.png",
@@ -21,12 +21,12 @@ const slides = [
   },
   {
     tag: "Fitur 02",
-    title: "Detail Rute & Info Traveler",
+    title: "Detail Rute & Info Pembawa",
     subtitle: "Transparan dari asal sampai tujuan",
-    desc: "Setiap posting perjalanan menampilkan detail lengkap: nama traveler, tanggal & jam berangkat, asal keberangkatan, hingga ongkos titipan. Deal bisa langsung diklik dari halaman ini.",
+    desc: "Setiap posting perjalanan menampilkan detail lengkap: nama pembawa, tanggal dan jam berangkat, asal keberangkatan, tujuan, hingga ongkos titipan. Pengirim dapat menilai kecocokan sebelum membuat deal.",
     bullets: [
       "🗺️ Asal & tujuan rute jelas tertera",
-      "💸 Ongkos transparan sejak awal — Rp 20.000",
+      "💸 Ongkos transparan sejak awal",
       "🤝 Tombol DEAL langsung dari feed",
     ],
     imgSrc: "/screenshots/ss-ruteok.png",
@@ -37,12 +37,12 @@ const slides = [
   {
     tag: "Fitur 03",
     title: "Marketplace Outlet — Nitip Beliin",
-    subtitle: "Berbagai outlet aktif, belanja titip ke kurir",
-    desc: "Halaman Market menampilkan outlet pilihan dengan kategori Makanan, Obat, Sembako, dan lainnya. Berbagai merchant populer sudah terdaftar lengkap dengan promo ongkir dan label 'Bisa nitip'.",
+    subtitle: "Outlet lokal masuk ekosistem titip beli",
+    desc: "Halaman Market menampilkan outlet pilihan dengan kategori Makanan, Obat, Sembako, dan lainnya. Warung yang belum digital tetap bisa masuk lewat model Kurir, Customer, atau Pemilik.",
     bullets: [
-      "🏪 Berbagai outlet aktif terdaftar",
+      "🏪 Sistem Outlet 3 Model",
       "🍱 Filter kategori: Makanan, Obat, Sembako",
-      "📢 Promo ongkir & diskon menarik",
+      "📢 Jembatan digitalisasi UMKM informal",
     ],
     imgSrc: "/screenshots/ss-market.jpeg",
     imgAlt: "Marketplace Outlet Numpak",
@@ -65,11 +65,11 @@ const slides = [
   },
   {
     tag: "Fitur 05",
-    title: "Transaksi Terlacak & Terlindungi",
-    subtitle: "Escrow payment, dana aman",
-    desc: "Contoh transaksi dengan rute populer: Area A→Area B, Kota X→Kota Y, dan lebih banyak lagi. Setiap transaksi punya status jelas — Menunggu Bayar, Ready to Ship, atau Dibatalkan.",
+    title: "Transaksi Terlacak",
+    subtitle: "Status deal jelas dari awal sampai selesai",
+    desc: "Setiap transaksi punya status jelas seperti Menunggu Bayar, Ready to Ship, Selesai, atau Dibatalkan. Data transaksi masuk ke dashboard agar admin dapat memantau aktivitas dan menangani sengketa.",
     bullets: [
-      "💳 Escrow: dana cair setelah konfirmasi",
+      "💳 Escrow disiapkan untuk fase produksi",
       "📦 Label OWNER & CARRIER per transaksi",
       "📊 Riwayat lengkap dengan ekspor PDF",
     ],
@@ -79,9 +79,9 @@ const slides = [
   },
   {
     tag: "Fitur 06",
-    title: "Fitur dalam Satu Platform",
+    title: "7 Fitur dalam Satu Platform",
     subtitle: "Ekosistem peer-to-peer terlengkap",
-    desc: "Dari Nitip Bawain, Nitip Beliin, Nyari Boncengan, sampai Jualan Keliling — semua tersedia di satu tampilan. Platform yang adaptif untuk berbagai kebutuhan mobilitas komunitas.",
+    desc: "Dari Nitip Bawain, Nitip Beliin, Nyari Boncengan, Nyari Tukang, Dalam Perjalanan, Jualan Keliling, sampai Outlet — semua tersedia di satu ekosistem mobilitas komunitas.",
     bullets: [
       "🧳 Nitip Bawain & Nitip Beliin",
       "🛵 Nyari Boncengan & Nyari Tukang",
@@ -95,10 +95,10 @@ const slides = [
     tag: "Fitur 07",
     title: "Keranjang Nitip — Titip Belanja Lintas Kota",
     subtitle: "Belanja dari toko manapun via kurir",
-    desc: "Mau pesan makanan favorit dari merchant populer di kotamu tapi kamu sedang sibuk? Tambahkan ke Keranjang Nitip, temukan kurir yang lewat, dan barang sampai ke tanganmu.",
+    desc: "Pengguna dapat checkout produk dari outlet terdaftar, lalu meminta orang yang memang sedang melewati rute outlet ke lokasi penerima untuk sekalian membelikan.",
     bullets: [
       "🛒 Keranjang nitip multi-outlet",
-      "🍱 Nitip ke Kurir terdekat",
+      "🍱 Titip ke pembawa yang searah",
       "💰 Estimasi total transparan",
     ],
     imgSrc: "/screenshots/ss-deal.jpeg",
@@ -109,7 +109,7 @@ const slides = [
     tag: "Fitur 08",
     title: "Profil Verified Pro & Sistem Reputasi",
     subtitle: "Trust by design, bukan sekadar janji",
-    desc: "Sistem reputasi Numpak memastikan setiap profil memiliki kredibilitas yang terverifikasi. XP, jumlah postingan, dan galeri aktivitas membangun kepercayaan komunitas secara organik.",
+    desc: "Sistem reputasi Numpak membantu mengurangi risiko transaksi antar orang asing. XP, jumlah postingan, rating, dan galeri aktivitas membangun kepercayaan komunitas secara bertahap.",
     bullets: [
       "⭐ Badge Verified Pro berbasis XP",
       "📈 Review aktif terlacak",
@@ -123,7 +123,7 @@ const slides = [
     tag: "Fitur 09",
     title: "Outlet Saya — Sistem Outlet 3 Model",
     subtitle: "Warung offline masuk ekosistem digital",
-    desc: "Inovasi unik Numpak: outlet bisa didaftarkan oleh Kurir, Pemilik, atau Customer setia. Berbagai outlet telah bergabung — warung konvensional pun kini bisa terhubung ke ekosistem digital.",
+    desc: "Outlet bisa didaftarkan oleh Kurir, Pemilik, atau Customer setia. Warung konvensional yang pemiliknya belum melek teknologi tetap dapat muncul di marketplace Numpak.",
     bullets: [
       "🏪 3 model: Kurir / Pemilik / Customer",
       "🛍️ Kelola produk & harga langsung",
@@ -174,8 +174,8 @@ export default function ScreenshotShowcase() {
           <span className={styles.accent}>Siap diuji.</span>
         </h2>
         <p className={styles.desc}>
-          Setiap layar di bawah adalah gambaran alur kerja aplikasi — dari
-          pencarian rute hingga penyelesaian transaksi.
+          Setiap layar di bawah menggambarkan alur prototype live — dari
+          pencarian rute, chat, deal, transaksi, sampai reputasi pengguna.
         </p>
       </div>
 

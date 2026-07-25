@@ -2,21 +2,9 @@
 
 .section {
     padding: 100px 5%;
-    background: var(--navy, #0a1628);
+    background: transparent;
     overflow: hidden;
     position: relative;
-}
-
-/* subtle grid texture */
-.section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 48px 48px;
-    pointer-events: none;
 }
 
 /* ── HEADER ─────────────────────────────────────────────── */

@@ -9,10 +9,10 @@ const slides = [
     tag: "Admin 01",
     title: "Dashboard Utama",
     subtitle: "Pantau performa platform secara real-time",
-    desc: "Ringkasan data penting mulai dari total pengguna, postingan aktif, hingga analisis pendapatan dalam satu tampilan dashboard yang intuitif.",
+    desc: "Ringkasan data penting mulai dari total pengguna, postingan aktif, deal uji coba, hingga analisis transaksi dalam satu tampilan dashboard yang intuitif.",
     bullets: [
-      "📈 Grafik analisis pendapatan otomatis",
-      "👥 Monitor jumlah pengguna & deal aktif",
+      "📈 Grafik analisis transaksi otomatis",
+      "👥 Monitor jumlah pengguna & deal uji coba",
       "🔔 Akses cepat ke notifikasi & bantuan chat",
     ],
     imgSrc: "/screenshots/ssn-dashboard-1.png",
@@ -23,7 +23,7 @@ const slides = [
     tag: "Admin 02",
     title: "Manajemen Pengguna",
     subtitle: "Kelola basis data pengguna dengan detail",
-    desc: "Sistem tabel yang kuat untuk memantau data pengguna, peran (User/Admin), hingga status verifikasi Clerk ID secara transparan.",
+    desc: "Sistem tabel untuk memantau data pengguna, peran User/Admin, hingga status verifikasi Clerk ID secara transparan.",
     bullets: [
       "🔍 Pencarian & filter pengguna cepat",
       "🛠️ Ubah peran & kelola akses akun",
@@ -358,8 +358,8 @@ export default function DashboardShowcase() {
           Kendali Penuh di <span className={styles.accent}>Ujung Jari.</span>
         </h2>
         <p className={styles.desc}>
-          Sistem manajemen terpusat untuk memantau metrik platform, keamanan
-          transaksi, dan pertumbuhan ekosistem Numpak secara efisien.
+          Sistem manajemen terpusat untuk memantau metrik prototype, deal,
+          transaksi uji coba, dan pertumbuhan ekosistem Numpak secara efisien.
         </p>
       </div>
 

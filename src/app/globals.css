@@ -10,25 +10,18 @@ html {
 }
 body {
     font-family: var(--font-body, "DM Sans", sans-serif);
-    background: #0a1628;
+    background-color: #0a1628;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+    background-size: 96px 96px;
+    background-position: top center;
+    background-attachment: fixed;
     color: rgba(255, 255, 255, 0.9);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     position: relative;
     min-height: 100vh;
-}
-
-/* subtle grid texture globally */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 64px 64px;
-    pointer-events: none;
-    z-index: -1;
 }
 
 [data-animate] {

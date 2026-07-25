@@ -15,9 +15,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Numpak — Optimalkan Mobilitas, Sederhanakan Logistik",
+  title: "Numpak — Titip Kirim Searah Tanpa Armada Baru",
   description:
-    "Platform logistik peer-to-peer berbasis komunitas traveler Indonesia.",
+    "Platform peer-to-peer untuk titip kirim barang melalui orang yang memang sedang melewati rute yang sama, tanpa batas profesi, jarak, atau moda.",
   icons: {
     icon: "/favicon.ico",
   },

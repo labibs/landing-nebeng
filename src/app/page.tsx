@@ -135,10 +135,10 @@ export default function Home() {
       <header className={styles.hero}>
         <div className={styles.heroBg}>
           <Image
-            src="/heroo.png"
+            src="/herook.png"
             alt="Numpak Hero Background"
             fill
-            style={{ objectFit: "cover" }}
+            style={{ objectFit: "cover", objectPosition: "center bottom" }}
             priority
           />
           <div className={styles.heroOverlay}></div>
@@ -153,15 +153,16 @@ export default function Home() {
             >
               <i></i> SAKTE.ID · TEAM ID : P0190
             </div>
-            {/*<h2 className={styles.heroH1}>
-              Optimalkan Mobilitas, <br />
-              <span className={styles.accent}>Sederhanakan Logistik.</span>
+            <h2 className={styles.heroH1}>
+              Titip Kirim Searah, <br />
+              <span className={styles.accent}>Tanpa Armada Baru.</span>
             </h2>
             <p className={styles.heroDesc}>
-              Numpak memobilisasi perjalanan komunitas untuk pengiriman yang
-              lebih cepat, hemat, dan terpercaya melalui arsitektur marketplace
-              berbasis kepercayaan (Escrow & Asuransi OJK).
-            </p>*/}
+              Numpak adalah platform peer-to-peer untuk titip kirim barang
+              melalui orang yang memang sedang melewati rute yang sama.
+              Bisa untuk dalam kota, antar kota, pulang kerja, naik kereta,
+              sampai perjalanan ke luar negeri selama ada orang yang searah.
+            </p>
             <div className={styles.heroButtons}>
               <a href="https://numpak.vercel.app" className={styles.btnPrimary}>
                 Coba Sekarang →
@@ -190,7 +191,7 @@ export default function Home() {
                 </div>
 
                 <div className={styles.trustText}>
-                  Dipakai <strong>Traveler & UMKM</strong>
+                  Prototype live <strong>numpak.vercel.app</strong>
                 </div>
               </div>
             </div>
@@ -199,11 +200,11 @@ export default function Home() {
       </header>
 
       <div className={styles.trusted}>
-        <div className={styles.trustedLabel}>Anchor Ecosystem</div>
+        <div className={styles.trustedLabel}>Untuk Semua Perjalanan</div>
         <div className={styles.trustedLogos}>
-          <span>Komunitas UMKM</span>
-          <span>Komunitas Mahasiswa</span>
-          <span>Komunitas Traveler</span>
+          <span>Pengirim Mendesak</span>
+          <span>Pembawa Searah</span>
+          <span>Outlet & Titip Belanja</span>
         </div>
       </div>
 
@@ -215,8 +216,8 @@ export default function Home() {
           <div className={styles.eyebrow}>Platform Fitur</div>
           <h2 className={styles.sectionTitle}>Problem–Solution Mapping</h2>
           <p className={styles.sectionDesc}>
-            Membangun arsitektur kepercayaan berlapis berbasis perjalanan
-            komunitas yang efisien dan inklusif.
+            Memetakan masalah pengiriman time-sensitive ke fitur yang sudah
+            ada di prototype Numpak, tanpa batas profesi, jarak, atau moda.
           </p>
         </div>
         <div className={styles.bentoGrid}>
@@ -224,9 +225,9 @@ export default function Home() {
             <div className={styles.bentoIcon + " " + styles.iconTeal}>📍</div>
             <h3>Nitip Bawain</h3>
             <p>
-              Menjawab mahalnya biaya logistik. Traveler yang melewati rute
-              pengirim mengambil titipan tanpa memperpanjang perjalanan. Biaya
-              pengiriman dapat ditekan 30–50% dibanding ekspedisi konvensional.
+              Menjawab ketiadaan cara terstruktur untuk menemukan orang yang
+              sedang searah. Pengirim memasukkan rute, barang, dan waktu;
+              traveler yang relevan muncul di feed untuk lanjut chat dan deal.
             </p>
           </div>
           <div
@@ -237,9 +238,9 @@ export default function Home() {
             <div className={styles.bentoIcon + " " + styles.iconAmber}>🛡️</div>
             <h3>Trust Architecture</h3>
             <p>
-              Arsitektur kepercayaan empat lapis: escrow payment, sistem
-              Verified Pro berbasis XP, rating dua arah, dan asuransi polis
-              digital per transaksi (OJK) — trust by design.
+              Kepercayaan dibangun melalui escrow payment, rating dua arah,
+              badge Verified Pro berbasis XP, dan rencana polis digital per
+              transaksi bersama mitra asuransi berlisensi OJK.
             </p>
           </div>
           <div
@@ -263,9 +264,9 @@ export default function Home() {
             <div className={styles.bentoIcon + " " + styles.iconRed}>✨</div>
             <h3>Community-Driven</h3>
             <p>
-              Mengaktifkan aset idle (kendaraan bergerak setiap hari) menjadi
-              infrastruktur logistik efektif tanpa investasi kendaraan baru —
-              zero incremental carbon footprint.
+              Mengaktifkan kapasitas perjalanan yang sudah terjadi. Numpak
+              tidak menggerakkan kendaraan baru; satu perjalanan dapat
+              melayani titipan barang, belanja, boncengan, dan kebutuhan lokal.
             </p>
           </div>
         </div>
@@ -274,7 +275,7 @@ export default function Home() {
       <section className={styles.statsSection}>
         <div className={styles.statsInner}>
           <div className={styles.statBlock} data-animate>
-            <div className={styles.statLabel}>Deal Aktif</div>
+            <div className={styles.statLabel}>Deal Uji Coba</div>
             <div className={styles.statNumber}>
               <span className={styles.accentNum}>30</span>+
             </div>
@@ -284,9 +285,9 @@ export default function Home() {
             data-animate
             style={{ transitionDelay: "0.1s" }}
           >
-            <div className={styles.statLabel}>Pertumbuhan</div>
+            <div className={styles.statLabel}>Akun Uji Coba</div>
             <div className={styles.statNumber}>
-              <span className={styles.accentNum}>12</span>%
+              <span className={styles.accentNum}>9</span>
             </div>
           </div>
           <div
@@ -294,9 +295,9 @@ export default function Home() {
             data-animate
             style={{ transitionDelay: "0.2s" }}
           >
-            <div className={styles.statLabel}>Efisiensi</div>
+            <div className={styles.statLabel}>Nilai Transaksi</div>
             <div className={styles.statNumber}>
-              <span className={styles.accentNum}>50</span>%
+              <span className={styles.accentNum}>110</span>K
             </div>
           </div>
         </div>
@@ -312,8 +313,9 @@ export default function Home() {
             <div className={styles.stepNum}>01</div>
             <h3>Input & Matching</h3>
             <p>
-              Input rute & kebutuhan. Algoritma Haversine mencocokkan traveler
-              searah dengan deviasi ≤10 km secara real-time dari feed aktif.
+              Pengirim memasukkan rute, detail barang, ukuran, dan waktu.
+              Sistem menampilkan posting perjalanan yang searah berdasarkan
+              kota asal, tujuan, waktu, kapasitas, dan rating.
             </p>
           </div>
           <div
@@ -324,8 +326,9 @@ export default function Home() {
             <div className={styles.stepNum}>02</div>
             <h3>Transaksi Escrow</h3>
             <p>
-              Negosiasi detail via chat in-app. Pembayaran ditahan sistem escrow
-              & polis asuransi digital diterbitkan otomatis per transaksi.
+              Negosiasi detail via chat in-app. Midtrans sudah berada di
+              sandbox; saat produksi, dana ditahan escrow dan asuransi
+              transaksi dapat diaktifkan saat checkout.
             </p>
           </div>
           <div
@@ -336,8 +339,8 @@ export default function Home() {
             <div className={styles.stepNum}>03</div>
             <h3>Output & Reputasi</h3>
             <p>
-              Pencairan dana setelah konfirmasi penerimaan. Perolehan rating &
-              XP untuk membangun profil Verified Pro dalam ekosistem komunitas.
+              Setelah barang diterima, status deal selesai, dana dilepas ke
+              traveler, dan rating dua arah membangun reputasi komunitas.
             </p>
           </div>
         </div>
@@ -357,8 +360,8 @@ export default function Home() {
                 </div>
                 <div className={styles.accBody}>
                   Komisi 8–12% dari setiap transaksi selesai. Menghasilkan
-                  estimasi Rp 1.600–9.600 per deal. Platform hanya dapat fee
-                  saat transaksi berhasil.
+                  estimasi Rp 3.200–4.800 pada rata-rata transaksi Rp 40.000.
+                  Platform hanya mendapat fee saat transaksi berhasil.
                 </div>
               </div>
               <div className={styles.accItem}>
@@ -379,7 +382,7 @@ export default function Home() {
                 <div className={styles.accBody}>
                   Merchant dapat mempromosikan toko di feed seharga Rp
                   50.000–200.000 per promo per minggu untuk menjangkau lebih
-                  banyak kurir and pelanggan.
+                  banyak traveler dan pelanggan.
                 </div>
               </div>
             </div>
@@ -434,9 +437,9 @@ export default function Home() {
                 </span>
               </div>
               <div className={styles.faqA}>
-                Dana dicairkan dari sistem escrow ke wallet traveler segera
-                setelah penerima mengkonfirmasi barang diterima dengan aman
-                lewat aplikasi untuk menjamin keadilan transaksi.
+                Pada versi produksi, dana escrow dicairkan ke traveler setelah
+                penerima mengonfirmasi barang diterima. Integrasi payment saat
+                ini sudah disiapkan di sandbox untuk pilot berikutnya.
               </div>
             </div>
             <div className={styles.faqItem} onClick={toggleFaq}>
@@ -447,9 +450,10 @@ export default function Home() {
                 </span>
               </div>
               <div className={styles.faqA}>
-                Kami mematuhi UU PDP No. 27/2022 secara ketat. Data identitas
-                dienkripsi AES-256 dan hanya digunakan secara internal untuk
-                verifikasi reputasi Verified Pro komunitas.
+                Prototype menggunakan Clerk untuk autentikasi, two-step
+                verification, device tracking, dan Supabase Row Level Security.
+                Verifikasi KTP otomatis dan audit keamanan disiapkan untuk fase
+                produksi.
               </div>
             </div>
             <div className={styles.faqItem} onClick={toggleFaq}>
@@ -476,8 +480,9 @@ export default function Home() {
               Numpak<span>™</span>
             </div>
             <p className={styles.footerDesc}>
-              Platform logistik peer-to-peer berbasis komunitas traveler
-              Indonesia. Pengembangan konsep & uji coba sistem 2026.
+              Platform peer-to-peer untuk titip kirim barang melalui perjalanan
+              yang sudah terjadi. Prototype fungsional dan uji coba lapangan
+              P0190 Bank Indonesia & YPPI Hackathon 2026.
             </p>
             <div className={styles.footerSocials}>
               <a href="#" className={styles.socialLink}>
