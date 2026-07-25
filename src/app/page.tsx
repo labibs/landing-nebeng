@@ -7,9 +7,23 @@ import ScreenshotShowcase from "./ScreenshotShowcase";
 import DashboardShowcase from "./DashboardShowcase";
 import Image from "next/image";
 
+const HERO_PHRASES = [
+  "Nitip Beli Sesuatu.",
+  "Nitip Kirim Barang.",
+  "Cari Boncengan.",
+  "Cari Tukang Lokal.",
+  "Tanpa Armada Baru.",
+  "Tanpa Gudang.",
+  "Tanpa Sortir.",
+  "Tanpa Transit.",
+  "Tanpa Biaya Balik.",
+  "Langsung ke Tujuan.",
+];
+
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
+  const [heroPhraseIndex, setHeroPhraseIndex] = useState(0);
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -46,6 +60,14 @@ export default function Home() {
       .querySelectorAll("[data-animate]")
       .forEach((el) => obs.observe(el));
     return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const phraseTimer = setInterval(() => {
+      setHeroPhraseIndex((current) => (current + 1) % HERO_PHRASES.length);
+    }, 2400);
+
+    return () => clearInterval(phraseTimer);
   }, []);
 
   const toggleAcc = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -154,14 +176,19 @@ export default function Home() {
               <i></i> SAKTE.ID · TEAM ID : P0190
             </div>
             <h2 className={styles.heroH1}>
-              Titip Kirim Searah, <br />
-              <span className={styles.accent}>Tanpa Armada Baru.</span>
+              Manfaatkan Perjalanan Searah, <br />
+              <span className={styles.heroRotator}>
+                <span key={heroPhraseIndex} className={styles.heroRotatorText}>
+                  {HERO_PHRASES[heroPhraseIndex]}
+                </span>
+              </span>
             </h2>
             <p className={styles.heroDesc}>
-              Numpak adalah platform peer-to-peer untuk titip kirim barang
-              melalui orang yang memang sedang melewati rute yang sama.
-              Bisa untuk dalam kota, antar kota, pulang kerja, naik kereta,
-              sampai perjalanan ke luar negeri selama ada orang yang searah.
+              Numpak adalah platform peer-to-peer untuk memanfaatkan perjalanan
+              yang sudah terjadi: bawain barang, beliin sesuatu, cari
+              boncengan, sampai kebutuhan lokal lain. Bisa untuk dalam kota,
+              antar kota, pulang kerja, naik kereta, hingga perjalanan ke luar
+              negeri selama ada orang yang searah.
             </p>
             <div className={styles.heroButtons}>
               <a href="https://numpak.vercel.app" className={styles.btnPrimary}>
@@ -202,9 +229,9 @@ export default function Home() {
       <div className={styles.trusted}>
         <div className={styles.trustedLabel}>Untuk Semua Perjalanan</div>
         <div className={styles.trustedLogos}>
-          <span>Pengirim Mendesak</span>
-          <span>Pembawa Searah</span>
-          <span>Outlet & Titip Belanja</span>
+          <span>Kirim Mendesak</span>
+          <span>Orang yang Searah</span>
+          <span>Outlet & Layanan Lokal</span>
         </div>
       </div>
 
@@ -216,8 +243,8 @@ export default function Home() {
           <div className={styles.eyebrow}>Platform Fitur</div>
           <h2 className={styles.sectionTitle}>Problem–Solution Mapping</h2>
           <p className={styles.sectionDesc}>
-            Memetakan masalah pengiriman time-sensitive ke fitur yang sudah
-            ada di prototype Numpak, tanpa batas profesi, jarak, atau moda.
+            Memetakan kebutuhan time-sensitive ke fitur yang sudah ada di
+            prototype Numpak, tanpa batas profesi, jarak, atau moda.
           </p>
         </div>
         <div className={styles.bentoGrid}>
@@ -226,8 +253,8 @@ export default function Home() {
             <h3>Nitip Bawain</h3>
             <p>
               Menjawab ketiadaan cara terstruktur untuk menemukan orang yang
-              sedang searah. Pengirim memasukkan rute, barang, dan waktu;
-              traveler yang relevan muncul di feed untuk lanjut chat dan deal.
+              sedang searah. Pengguna memasukkan rute, kebutuhan, dan waktu;
+              orang yang searah muncul di feed untuk lanjut chat dan deal.
             </p>
           </div>
           <div
@@ -266,7 +293,7 @@ export default function Home() {
             <p>
               Mengaktifkan kapasitas perjalanan yang sudah terjadi. Numpak
               tidak menggerakkan kendaraan baru; satu perjalanan dapat
-              melayani titipan barang, belanja, boncengan, dan kebutuhan lokal.
+              melayani bawain barang, belanja, boncengan, dan kebutuhan lokal.
             </p>
           </div>
         </div>
@@ -313,9 +340,9 @@ export default function Home() {
             <div className={styles.stepNum}>01</div>
             <h3>Input & Matching</h3>
             <p>
-              Pengirim memasukkan rute, detail barang, ukuran, dan waktu.
-              Sistem menampilkan posting perjalanan yang searah berdasarkan
-              kota asal, tujuan, waktu, kapasitas, dan rating.
+              Pengguna memasukkan rute, detail kebutuhan, ukuran atau kapasitas,
+              dan waktu. Sistem menampilkan posting perjalanan yang searah
+              berdasarkan asal, tujuan, waktu, kapasitas, dan rating.
             </p>
           </div>
           <div
@@ -340,7 +367,8 @@ export default function Home() {
             <h3>Output & Reputasi</h3>
             <p>
               Setelah barang diterima, status deal selesai, dana dilepas ke
-              traveler, dan rating dua arah membangun reputasi komunitas.
+              orang yang membantu, dan rating dua arah membangun reputasi
+              komunitas.
             </p>
           </div>
         </div>
@@ -382,7 +410,7 @@ export default function Home() {
                 <div className={styles.accBody}>
                   Merchant dapat mempromosikan toko di feed seharga Rp
                   50.000–200.000 per promo per minggu untuk menjangkau lebih
-                  banyak traveler dan pelanggan.
+                  banyak orang yang searah dan pelanggan.
                 </div>
               </div>
             </div>
@@ -433,13 +461,14 @@ export default function Home() {
               <div className={styles.faqQ}>
                 <span>
                   <span className={styles.faqNum}>01.</span> Kapan dana
-                  dicairkan ke traveler?
+                  dicairkan ke orang yang membantu?
                 </span>
               </div>
               <div className={styles.faqA}>
-                Pada versi produksi, dana escrow dicairkan ke traveler setelah
-                penerima mengonfirmasi barang diterima. Integrasi payment saat
-                ini sudah disiapkan di sandbox untuk pilot berikutnya.
+                Pada versi produksi, dana escrow dicairkan ke orang yang
+                membantu setelah penerima mengonfirmasi kebutuhan selesai.
+                Integrasi payment saat ini sudah disiapkan di sandbox untuk
+                pilot berikutnya.
               </div>
             </div>
             <div className={styles.faqItem} onClick={toggleFaq}>
@@ -480,9 +509,10 @@ export default function Home() {
               Numpak<span>™</span>
             </div>
             <p className={styles.footerDesc}>
-              Platform peer-to-peer untuk titip kirim barang melalui perjalanan
-              yang sudah terjadi. Prototype fungsional dan uji coba lapangan
-              P0190 Bank Indonesia & YPPI Hackathon 2026.
+              Platform peer-to-peer untuk kirim, beli, bonceng, dan bantu
+              kebutuhan searah melalui perjalanan yang sudah terjadi. Prototype
+              fungsional dan uji coba lapangan P0190 Bank Indonesia & YPPI
+              Hackathon 2026.
             </p>
             <div className={styles.footerSocials}>
               <a href="#" className={styles.socialLink}>

@@ -142,10 +142,10 @@
 .hero {
     min-height: 100vh;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     position: relative;
     overflow: hidden;
-    padding: 0 8% 100px;
+    padding: 120px 8% 56px;
 }
 
 .heroBg {
@@ -192,7 +192,7 @@
     letter-spacing: 1.5px;
     padding: 12px 24px;
     border-radius: 100px;
-    margin-top: 32px;
+    margin-top: 0;
     margin-bottom: 24px;
     text-transform: uppercase;
     transition: all 0.3s ease;
@@ -222,6 +222,37 @@
     background: linear-gradient(135deg, #0d9488 0%, #2dd4bf 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+.heroRotator {
+    display: inline-grid;
+    min-height: 1.08em;
+    overflow: hidden;
+    vertical-align: top;
+}
+.heroRotatorText {
+    display: inline-block;
+    font-size: 0.88em;
+    background: linear-gradient(135deg, #0d9488 0%, #2dd4bf 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: heroPhrasePop 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes heroPhrasePop {
+    0% {
+        opacity: 0;
+        transform: translateY(0.55em) scale(0.96);
+        filter: blur(4px);
+    }
+    65% {
+        opacity: 1;
+        transform: translateY(-0.04em) scale(1.02);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
 }
 .heroDesc {
     font-size: 1.1rem;
@@ -694,10 +725,10 @@
 
 @media (max-width: 1200px) {
     .hero {
-        padding-top: 140px;
-        text-align: center;
+        padding-top: 130px;
+        text-align: left;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         padding-bottom: 60px;
     }
     .heroOverlay {
@@ -708,18 +739,21 @@
         );
     }
     .heroLeft {
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
+        text-align: left;
+    }
+    .heroBadge {
+        margin-top: 0;
     }
     .heroH1 {
         font-size: 2.1rem;
     }
     .heroDesc {
-        margin-left: auto;
-        margin-right: auto;
+        margin-left: 0;
+        margin-right: 0;
     }
     .heroButtons {
-        justify-content: center;
+        justify-content: flex-start;
     }
     .bizInner,
     .faqInner,
@@ -739,6 +773,21 @@
     .bentoC,
     .bentoD {
         grid-column: span 1;
+    }
+}
+
+@media (max-width: 700px) {
+    .footerBottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .footerBadge {
+        order: 1;
+    }
+    .footerCopy {
+        order: 2;
+        line-height: 1.5;
     }
 }
 .navHidden {

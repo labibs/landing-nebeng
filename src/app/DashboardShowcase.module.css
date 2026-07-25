@@ -458,10 +458,11 @@
     font-family: var(--font-head, "Sora", sans-serif);
     font-size: clamp(1.6rem, 2.5vw, 2.2rem);
     font-weight: 800;
-    letter-spacing: -1px;
+    letter-spacing: 0;
     color: #fff;
     line-height: 1.15;
     margin-bottom: 8px;
+    overflow-wrap: anywhere;
 }
 
 .slideSubtitle {
@@ -622,19 +623,34 @@
 
 /* ── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 1000px) {
+    .header {
+        text-align: left;
+    }
+    .desc {
+        margin-left: 0;
+        margin-right: 0;
+    }
     .carousel {
         grid-template-columns: 1fr;
         gap: 56px;
     }
     .textPane {
-        text-align: center;
-        align-items: center;
+        text-align: left;
+        align-items: flex-start;
+        width: 100%;
+        min-width: 0;
     }
     .slideDesc {
         max-width: 100%;
     }
+    .bullets {
+        width: 100%;
+    }
+    .bullet {
+        width: 100%;
+    }
     .nav {
-        justify-content: center;
+        justify-content: flex-start;
         width: 100%;
     }
     .monitorWrap {

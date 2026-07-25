@@ -371,6 +371,13 @@
 
 /* ── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 900px) {
+    .header {
+        text-align: left;
+    }
+    .desc {
+        margin-left: 0;
+        margin-right: 0;
+    }
     .carousel {
         grid-template-columns: 1fr;
         gap: 48px;

@@ -8,8 +8,8 @@ const slides = [
   {
     tag: "Fitur 01",
     title: "Feed Dalam Perjalanan",
-    subtitle: "Temukan traveler yang searah",
-    desc: "Orang yang sedang berangkat memposting rutenya ke feed. Pengirim barang seperti Mba Ana tinggal mencari perjalanan Cilacap-Purwokerto yang sesuai hari ini, lalu lanjut ke chat dan deal.",
+    subtitle: "Temukan orang yang searah",
+    desc: "Orang yang sedang berangkat memposting rutenya ke feed. Pengguna tinggal mencari perjalanan yang sesuai untuk bawain barang, beliin sesuatu, boncengan, atau kebutuhan lain, lalu lanjut ke chat dan deal.",
     bullets: [
       "🟢 Rute aktif tampil langsung di feed",
       "⚡ Cocok untuk kebutuhan time-sensitive",
@@ -21,9 +21,9 @@ const slides = [
   },
   {
     tag: "Fitur 02",
-    title: "Detail Rute & Info Pembawa",
+    title: "Detail Rute & Info Orang Searah",
     subtitle: "Transparan dari asal sampai tujuan",
-    desc: "Setiap posting perjalanan menampilkan detail lengkap: nama pembawa, tanggal dan jam berangkat, asal keberangkatan, tujuan, hingga ongkos titipan. Pengirim dapat menilai kecocokan sebelum membuat deal.",
+    desc: "Setiap posting perjalanan menampilkan detail lengkap: nama, tanggal dan jam berangkat, asal keberangkatan, tujuan, hingga estimasi ongkos. Pengguna dapat menilai kecocokan sebelum membuat deal.",
     bullets: [
       "🗺️ Asal & tujuan rute jelas tertera",
       "💸 Ongkos transparan sejak awal",
@@ -55,7 +55,7 @@ const slides = [
     subtitle: "Nego tanpa keluar platform",
     desc: "Pengguna dapat berinteraksi lewat chat in-app Numpak. Negosiasi harga, koordinasi titik jemput, hingga konfirmasi barang — semua dalam satu tempat yang aman.",
     bullets: [
-      "💬 Chat langsung antar traveler & pengirim",
+      "💬 Chat langsung antar pengguna",
       "🔔 Notifikasi deal offer real-time",
       "🔒 Riwayat chat tersimpan aman",
     ],
@@ -98,7 +98,7 @@ const slides = [
     desc: "Pengguna dapat checkout produk dari outlet terdaftar, lalu meminta orang yang memang sedang melewati rute outlet ke lokasi penerima untuk sekalian membelikan.",
     bullets: [
       "🛒 Keranjang nitip multi-outlet",
-      "🍱 Titip ke pembawa yang searah",
+      "🍱 Dibantu orang yang searah",
       "💰 Estimasi total transparan",
     ],
     imgSrc: "/screenshots/ss-deal.jpeg",
