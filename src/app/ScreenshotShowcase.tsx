@@ -249,6 +249,7 @@ export default function ScreenshotShowcase() {
                 src={slide.imgSrc}
                 alt={slide.imgAlt}
                 fill
+                sizes="(max-width: 900px) 280px, 360px"
                 style={{ objectFit: "cover", objectPosition: "top" }}
               />
             </div>

@@ -198,7 +198,7 @@ function AppleMonitorMockup({
               >
                 <ChromeIcon size={11} />
                 <span className={styles.chromeTabTitle}>
-                  Numpak Admin — Dashboard
+                  numpak Admin — Dashboard
                 </span>
                 <span className={styles.chromeTabClose}>✕</span>
               </div>
@@ -284,18 +284,20 @@ function AppleMonitorMockup({
             </div>*/}
 
             {/* screenshot */}
-            <div className={`${styles.screenContent} ${screenAnimClass}`}>
-              <Image
-                src={slide.imgSrc}
-                alt={slide.imgAlt}
-                fill
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "top",
-                  background: "#f8fafc",
-                }}
-                priority
-              />
+            <div className={styles.screenContent}>
+              <div className={`${styles.screenImage} ${screenAnimClass}`}>
+                <Image
+                  src={slide.imgSrc}
+                  alt={slide.imgAlt}
+                  fill
+                  sizes="(max-width: 1000px) 92vw, 560px"
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: "top",
+                    background: "#f8fafc",
+                  }}
+                />
+              </div>
             </div>
 
             {/* Chrome status bar */}

@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import { Sora, DM_Sans } from "next/font/google";
+import { Comfortaa } from "next/font/google";
 import "./globals.css";
 
-const sora = Sora({
+const comfortaaHead = Comfortaa({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-head",
 });
 
-const dmSans = DM_Sans({
+const comfortaaBody = Comfortaa({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-body",
 });
 
 export const metadata: Metadata = {
-  title: "Numpak — Manfaatkan Perjalanan Searah",
+  title: "numpak — Manfaatkan Perjalanan Searah",
   description:
     "Platform peer-to-peer untuk bawain barang, beliin sesuatu, cari boncengan, dan kebutuhan lokal lain melalui orang yang memang sedang searah.",
   icons: {
@@ -30,7 +30,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <body className={sora.variable + " " + dmSans.variable}>{children}</body>
+      <body className={comfortaaHead.variable + " " + comfortaaBody.variable}>
+        {children}
+      </body>
     </html>
   );
 }

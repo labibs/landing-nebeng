@@ -114,6 +114,7 @@ export default function Home() {
             width={160}
             height={46}
             className={styles.logoImg}
+            sizes="160px"
             priority
           />
         </div>
@@ -160,6 +161,7 @@ export default function Home() {
             src="/herook.png"
             alt="Numpak Hero Background"
             fill
+            sizes="100vw"
             style={{ objectFit: "cover", objectPosition: "center bottom" }}
             priority
           />
@@ -384,7 +386,8 @@ export default function Home() {
             <div className={styles.accordion}>
               <div className={styles.accItem}>
                 <div className={styles.accHeader} onClick={toggleAcc}>
-                  Service Fee per Transaksi
+                  <span>Service Fee per Transaksi</span>
+                  <span className={styles.collapseIcon}>+</span>
                 </div>
                 <div className={styles.accBody}>
                   Komisi 8–12% dari setiap transaksi selesai. Menghasilkan
@@ -394,7 +397,8 @@ export default function Home() {
               </div>
               <div className={styles.accItem}>
                 <div className={styles.accHeader} onClick={toggleAcc}>
-                  Premium Membership
+                  <span>Premium Membership</span>
+                  <span className={styles.collapseIcon}>+</span>
                 </div>
                 <div className={styles.accBody}>
                   {" "}
@@ -405,7 +409,8 @@ export default function Home() {
               </div>
               <div className={styles.accItem}>
                 <div className={styles.accHeader} onClick={toggleAcc}>
-                  Outlet Ads
+                  <span>Outlet Ads</span>
+                  <span className={styles.collapseIcon}>+</span>
                 </div>
                 <div className={styles.accBody}>
                   Merchant dapat mempromosikan toko di feed seharga Rp
@@ -463,6 +468,7 @@ export default function Home() {
                   <span className={styles.faqNum}>01.</span> Kapan dana
                   dicairkan ke orang yang membantu?
                 </span>
+                <span className={styles.collapseIcon}>+</span>
               </div>
               <div className={styles.faqA}>
                 Pada versi produksi, dana escrow dicairkan ke orang yang
@@ -477,6 +483,7 @@ export default function Home() {
                   <span className={styles.faqNum}>02.</span> Bagaimana
                   perlindungan data pribadi?
                 </span>
+                <span className={styles.collapseIcon}>+</span>
               </div>
               <div className={styles.faqA}>
                 Prototype menggunakan Clerk untuk autentikasi, two-step
@@ -491,6 +498,7 @@ export default function Home() {
                   <span className={styles.faqNum}>03.</span> Apa itu Sistem
                   Outlet 3 Model?
                 </span>
+                <span className={styles.collapseIcon}>+</span>
               </div>
               <div className={styles.faqA}>
                 Inovasi inklusi digital dimana warung bisa didaftarkan oleh
@@ -506,7 +514,14 @@ export default function Home() {
         <div className={styles.footerInner}>
           <div>
             <div className={styles.footerBrand}>
-              Numpak<span>™</span>
+              <Image
+                src="/logoo.png"
+                alt="numpak Logo"
+                width={190}
+                height={55}
+                className={styles.footerLogoImg}
+                sizes="190px"
+              />
             </div>
             <p className={styles.footerDesc}>
               Platform peer-to-peer untuk kirim, beli, bonceng, dan bantu
@@ -514,17 +529,6 @@ export default function Home() {
               fungsional dan uji coba lapangan P0190 Bank Indonesia & YPPI
               Hackathon 2026.
             </p>
-            <div className={styles.footerSocials}>
-              <a href="#" className={styles.socialLink}>
-                𝕏
-              </a>
-              <a href="#" className={styles.socialLink}>
-                IG
-              </a>
-              <a href="#" className={styles.socialLink}>
-                LI
-              </a>
-            </div>
           </div>
           <div className={styles.footerCol}>
             <h4>Platform</h4>
