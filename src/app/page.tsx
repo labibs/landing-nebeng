@@ -294,8 +294,9 @@ export default function Home() {
             <h3>Community-Driven</h3>
             <p>
               Mengaktifkan kapasitas perjalanan yang sudah terjadi. Numpak
-              tidak menggerakkan kendaraan baru; satu perjalanan dapat
-              melayani bawain barang, belanja, boncengan, dan kebutuhan lokal.
+              bisa dipakai saat naik kendaraan pribadi, kereta, bus, atau
+              travelling; selama searah, perjalanan dapat sekalian bawain
+              titipan, beliin oleh-oleh, atau bantu kebutuhan lain.
             </p>
           </div>
         </div>
