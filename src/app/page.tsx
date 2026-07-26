@@ -9,7 +9,7 @@ import Image from "next/image";
 
 const HERO_PHRASES = [
   "Nitip Beli Sesuatu.",
-  "Nitip Kirim Barang.",
+  "Nitip Kirim Sesuatu.",
   "Cari Boncengan.",
   "Cari Tukang Lokal.",
   "Tanpa Armada Baru.",
