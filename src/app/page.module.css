@@ -179,36 +179,6 @@
     align-items: flex-start;
 }
 
-.heroBadge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    padding: 12px 24px;
-    border-radius: 100px;
-    margin-top: 0;
-    margin-bottom: 24px;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-}
-.heroBadge:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-.heroBadge i {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--teal);
-    box-shadow: 0 0 12px var(--teal);
-}
-
 .heroH1 {
     font-family: var(--font-head);
     font-size: 3rem;
@@ -282,6 +252,10 @@
     border-radius: 100px;
     text-decoration: none;
     font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
     transition: all 0.3s;
     box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
 }
@@ -301,6 +275,10 @@
     border-radius: 100px;
     text-decoration: none;
     font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
 
 .heroTrust {
@@ -439,37 +417,184 @@
 .statsSection {
     padding: 100px 8%;
 }
-.statsInner {
+.statsDashboard {
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 28px;
+    background: #0b1018;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.25);
+}
+.statsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 0 4px 24px;
+}
+.statsKicker {
+    color: var(--teal);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+.statsHeader h2 {
+    margin: 7px 0 0;
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+.statsLive {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+.statsLive span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.12);
+}
+.statsMain {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--glass-border);
-    border-radius: 40px;
+    grid-template-columns: minmax(0, 1.15fr) minmax(380px, 1fr);
+    gap: 16px;
+}
+.revenuePanel,
+.metricCard {
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+    border-radius: 18px;
+}
+.revenuePanel {
+    position: relative;
+    min-height: 300px;
+    padding: 26px;
     overflow: hidden;
-    border: 1px solid var(--glass-border);
 }
-.statBlock {
-    padding: 60px 32px;
-    background: rgba(10, 22, 40, 0.6);
-    text-align: center;
-}
-.statLabel {
+.panelTopline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.8rem;
     font-weight: 700;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
 }
-.statNumber {
-    font-family: var(--font-head);
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: -2px;
-}
-.accentNum {
+.panelTopline > svg {
+    margin-left: auto;
     color: var(--teal);
+}
+.panelIcon {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border-radius: 12px;
+    color: #5eead4;
+    background: rgba(13, 148, 136, 0.14);
+}
+.revenueAmount {
+    font-family: var(--font-head);
+    margin-top: 26px;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3.35rem);
+    font-weight: 700;
+    letter-spacing: 0;
+}
+.revenueCaption {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.48);
+    font-size: 0.76rem;
+}
+.activityChart {
+    position: absolute;
+    right: 26px;
+    bottom: 42px;
+    left: 26px;
+    display: flex;
+    align-items: end;
+    gap: clamp(6px, 1.2vw, 14px);
+    height: 96px;
+    padding-top: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 100% 32px;
+}
+.activityChart span {
+    display: block;
+    flex: 1;
+    min-width: 10px;
+    transform-origin: bottom;
+    border-radius: 7px 7px 2px 2px;
+    background: linear-gradient(to top, #0d9488, #5eead4);
+    box-shadow: 0 -6px 18px rgba(45, 212, 191, 0.12);
+}
+.activityChart span:nth-child(3n) {
+    background: linear-gradient(to top, #2563eb, #60a5fa);
+}
+.chartCaption {
+    position: absolute;
+    bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.72rem;
+}
+.chartCaption svg {
+    color: #34d399;
+}
+.metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+.metricCard {
+    display: flex;
+    flex-direction: column;
+    min-height: 128px;
+    padding: 19px;
+    transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+.metricCard:hover {
+    border-color: rgba(94, 234, 212, 0.42);
+    background: rgba(13, 148, 136, 0.08);
+    transform: translateY(-3px);
+}
+.metricCard > svg {
+    color: #5eead4;
+}
+.metricCard span {
+    margin-top: auto;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+.metricCard strong {
+    margin-top: 5px;
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+.metricCardWide {
+    grid-column: span 2;
+    min-height: 88px;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+.metricCardWide span {
+    margin: 0;
+}
+.metricCardWide strong {
+    margin: 0 0 0 auto;
+    font-size: 2rem;
 }
 
 .howSection {
@@ -761,9 +886,6 @@
         align-items: flex-start;
         text-align: left;
     }
-    .heroBadge {
-        margin-top: 0;
-    }
     .heroH1 {
         font-size: 2.1rem;
     }
@@ -783,8 +905,10 @@
         gap: 60px;
     }
     .bentoGrid,
-    .stepsGrid,
-    .statsInner {
+    .stepsGrid {
+        grid-template-columns: 1fr;
+    }
+    .statsMain {
         grid-template-columns: 1fr;
     }
     .bentoA,
@@ -796,6 +920,65 @@
 }
 
 @media (max-width: 700px) {
+    .statsSection {
+        padding: 72px 5%;
+    }
+    .statsDashboard {
+        padding: 16px;
+        border-radius: 22px;
+    }
+    .statsHeader {
+        align-items: flex-start;
+        padding: 4px 2px 18px;
+    }
+    .statsHeader h2 {
+        font-size: 1.08rem;
+    }
+    .statsLive {
+        font-size: 0.62rem;
+        white-space: nowrap;
+    }
+    .revenuePanel {
+        min-height: 264px;
+        padding: 20px;
+    }
+    .revenueAmount {
+        margin-top: 20px;
+        font-size: 2.1rem;
+    }
+    .activityChart {
+        right: 20px;
+        bottom: 40px;
+        left: 20px;
+        height: 78px;
+    }
+    .chartCaption {
+        bottom: 16px;
+    }
+    .metricCard {
+        min-height: 112px;
+        padding: 15px;
+    }
+    .metricCardWide {
+        min-height: 76px;
+    }
+    .heroButtons {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        width: 100%;
+        max-width: 420px;
+        gap: 12px;
+        margin-bottom: 34px;
+    }
+    .btnPrimary,
+    .btnSecondary {
+        min-width: 0;
+        min-height: 54px;
+        padding: 12px 10px;
+        font-size: 0.72rem;
+        line-height: 1.25;
+        text-align: center;
+    }
     .footerBottom {
         flex-direction: column;
         align-items: flex-start;
@@ -847,4 +1030,72 @@
 .trustText strong {
     color: #86efac;
     font-weight: 700;
+}
+
+.appBubble {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    z-index: 1100;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 10px 18px 10px 11px;
+    border: 1px solid rgba(45, 212, 191, 0.45);
+    border-radius: 999px;
+    background: rgba(8, 28, 49, 0.9);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(14px);
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.appBubble:hover {
+    transform: translateY(-3px);
+    background: #0d9488;
+    box-shadow: 0 15px 34px rgba(13, 148, 136, 0.34);
+}
+
+.appBubbleIcon {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    background: transparent;
+    overflow: hidden;
+    flex: 0 0 30px;
+}
+
+.appBubbleLabel {
+    display: inline-block;
+    min-width: 96px;
+}
+
+.appBubbleCursor {
+    display: inline-block;
+    margin-left: 1px;
+    color: #5eead4;
+}
+
+.appBubbleLogo {
+    width: 92px;
+    max-width: none;
+    height: 30px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+@media (max-width: 700px) {
+    .appBubble {
+        right: 16px;
+        bottom: 16px;
+        min-height: 48px;
+        padding-right: 15px;
+        font-size: 0.72rem;
+    }
 }

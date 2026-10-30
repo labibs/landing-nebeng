@@ -1,6 +1,17 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  Handshake,
+  Package,
+  ReceiptText,
+  Store,
+  TrendingUp,
+  Users,
+  WalletCards,
+} from "lucide-react";
 
 import styles from "./page.module.css";
 import ScreenshotShowcase from "./ScreenshotShowcase";
@@ -19,11 +30,13 @@ const HERO_PHRASES = [
   "Tanpa Biaya Balik.",
   "Langsung ke Tujuan.",
 ];
+const APP_CTA_LABEL = "Coba Aplikasi";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [heroPhraseIndex, setHeroPhraseIndex] = useState(0);
+  const [typedAppLabel, setTypedAppLabel] = useState("");
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -68,6 +81,30 @@ export default function Home() {
     }, 2400);
 
     return () => clearInterval(phraseTimer);
+  }, []);
+
+  useEffect(() => {
+    let characterIndex = 0;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const typeLabel = () => {
+      characterIndex += 1;
+      setTypedAppLabel(APP_CTA_LABEL.slice(0, characterIndex));
+
+      if (characterIndex < APP_CTA_LABEL.length) {
+        timeout = setTimeout(typeLabel, 85);
+        return;
+      }
+
+      timeout = setTimeout(() => {
+        characterIndex = 0;
+        setTypedAppLabel("");
+        timeout = setTimeout(typeLabel, 350);
+      }, 2600);
+    };
+
+    timeout = setTimeout(typeLabel, 500);
+    return () => clearTimeout(timeout);
   }, []);
 
   const toggleAcc = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -149,7 +186,7 @@ export default function Home() {
         <button
           className={styles.navCta}
           style={{ marginTop: "40px" }}
-          onClick={() => window.open("https://numpak.vercel.app")}
+          onClick={() => window.open("https://numpak.sakte.id/", "_blank")}
         >
           Coba Prototype
         </button>
@@ -170,13 +207,6 @@ export default function Home() {
 
         <div data-animate className={styles.heroContent}>
           <div className={styles.heroLeft}>
-            <div
-              className={styles.heroBadge}
-              style={{ cursor: "pointer" }}
-              onClick={() => window.open("https://sakte.id")}
-            >
-              <i></i> SAKTE.ID · TEAM ID : P0190
-            </div>
             <h2 className={styles.heroH1}>
               Manfaatkan Perjalanan Searah, <br />
               <span className={styles.heroRotator}>
@@ -192,14 +222,31 @@ export default function Home() {
               antar kota, pulang kerja, naik kereta, hingga perjalanan ke luar
               negeri selama ada orang yang searah.
             </p>
-            <div className={styles.heroButtons}>
-              <a href="https://numpak.vercel.app" className={styles.btnPrimary}>
+            <motion.div
+              className={styles.heroButtons}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.25, ease: "easeOut" }}
+            >
+              <motion.a
+                href="https://numpak.sakte.id/"
+                className={styles.btnPrimary}
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ y: -4, scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+              >
                 Coba Sekarang →
-              </a>
-              <a href="#showcase" className={styles.btnSecondary}>
+              </motion.a>
+              <motion.a
+                href="#showcase"
+                className={styles.btnSecondary}
+                whileHover={{ y: -4, scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+              >
                 Pelajari Fitur
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
             <div className={styles.heroTrust}>
               <div className={styles.trustBadge}>
                 <div className={styles.trustIcon}>
@@ -220,7 +267,7 @@ export default function Home() {
                 </div>
 
                 <div className={styles.trustText}>
-                  Prototype live <strong>numpak.vercel.app</strong>
+                  Prototype live <strong>numpak.sakte.id</strong>
                 </div>
               </div>
             </div>
@@ -303,31 +350,73 @@ export default function Home() {
       </section>
 
       <section className={styles.statsSection}>
-        <div className={styles.statsInner}>
-          <div className={styles.statBlock} data-animate>
-            <div className={styles.statLabel}>Deal Uji Coba</div>
-            <div className={styles.statNumber}>
-              <span className={styles.accentNum}>30</span>+
+        <div className={styles.statsDashboard} data-animate>
+          <div className={styles.statsHeader}>
+            <div>
+              <div className={styles.statsKicker}>Ringkasan Platform</div>
+              <h2>Aktivitas Numpak</h2>
+            </div>
+            <div className={styles.statsLive}>
+              <span></span> Data Terkini
             </div>
           </div>
-          <div
-            className={styles.statBlock}
-            data-animate
-            style={{ transitionDelay: "0.1s" }}
-          >
-            <div className={styles.statLabel}>Akun Uji Coba</div>
-            <div className={styles.statNumber}>
-              <span className={styles.accentNum}>9</span>
+
+          <div className={styles.statsMain}>
+            <div className={styles.revenuePanel}>
+              <div className={styles.panelTopline}>
+                <div className={styles.panelIcon}>
+                  <WalletCards size={20} strokeWidth={1.8} />
+                </div>
+                <span>Total Pendapatan</span>
+                <ArrowUpRight size={19} />
+              </div>
+              <div className={styles.revenueAmount}>Rp630.000</div>
+              <div className={styles.revenueCaption}>
+                Tercatat dari 4 transaksi yang telah diselesaikan.
+              </div>
+              <div className={styles.activityChart} aria-label="Visualisasi aktivitas platform">
+                {[44, 65, 52, 82, 60, 94, 72, 86].map((height, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ scaleY: 0 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.45, delay: index * 0.06 }}
+                    style={{ height: `${height}%` }}
+                  />
+                ))}
+              </div>
+              <div className={styles.chartCaption}>
+                <TrendingUp size={15} /> Aktivitas ekosistem
+              </div>
             </div>
-          </div>
-          <div
-            className={styles.statBlock}
-            data-animate
-            style={{ transitionDelay: "0.2s" }}
-          >
-            <div className={styles.statLabel}>Nilai Transaksi</div>
-            <div className={styles.statNumber}>
-              <span className={styles.accentNum}>110</span>K
+
+            <div className={styles.metricsGrid}>
+              <div className={styles.metricCard}>
+                <Users size={19} />
+                <span>Total Pengguna</span>
+                <strong>11</strong>
+              </div>
+              <div className={styles.metricCard}>
+                <ReceiptText size={19} />
+                <span>Total Transaksi</span>
+                <strong>4</strong>
+              </div>
+              <div className={styles.metricCard}>
+                <Handshake size={19} />
+                <span>Total Deal</span>
+                <strong>32</strong>
+              </div>
+              <div className={styles.metricCard}>
+                <Store size={19} />
+                <span>Total Toko</span>
+                <strong>9</strong>
+              </div>
+              <div className={`${styles.metricCard} ${styles.metricCardWide}`}>
+                <Package size={19} />
+                <span>Total Produk</span>
+                <strong>8</strong>
+              </div>
             </div>
           </div>
         </div>
@@ -526,9 +615,9 @@ export default function Home() {
             </div>
             <p className={styles.footerDesc}>
               Platform peer-to-peer untuk kirim, beli, bonceng, dan bantu
-              kebutuhan searah melalui perjalanan yang sudah terjadi. Prototype
-              fungsional dan uji coba lapangan P0190 Bank Indonesia & YPPI
-              Hackathon 2026.
+              kebutuhan searah melalui perjalanan yang sudah terjadi. Hadir
+              untuk siapa pun yang ingin memanfaatkan perjalanan dengan lebih
+              praktis dan saling membantu.
             </p>
           </div>
           <div className={styles.footerCol}>
@@ -541,7 +630,9 @@ export default function Home() {
             <h4>Resources</h4>
             <a href="#business">Model Bisnis</a>
             <a href="#faq">Pusat Bantuan</a>
-            <a href="https://numpak.vercel.app">Live Demo</a>
+            <a href="https://numpak.sakte.id/" target="_blank" rel="noreferrer">
+              Live Demo
+            </a>
           </div>
           <div className={styles.footerCol}>
             <h4>Corporate</h4>
@@ -559,9 +650,39 @@ export default function Home() {
           <p className={styles.footerCopy}>
             © 2026 sakte.id · PT. Satya Karya Technosolution
           </p>
-          <div className={styles.footerBadge}>numpak.vercel.app</div>
+          <div className={styles.footerBadge}>numpak.sakte.id</div>
         </div>
       </footer>
+
+      <a
+        href="https://numpak.sakte.id/"
+        className={styles.appBubble}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Coba aplikasi Numpak"
+      >
+        <span className={styles.appBubbleIcon} aria-hidden="true">
+          <Image
+            src="/logoo.png"
+            alt=""
+            width={92}
+            height={30}
+            className={styles.appBubbleLogo}
+            sizes="92px"
+          />
+        </span>
+        <span className={styles.appBubbleLabel}>
+          {typedAppLabel}
+          <motion.span
+            className={styles.appBubbleCursor}
+            animate={{ opacity: [0, 1, 1, 0] }}
+            transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+            aria-hidden="true"
+          >
+            |
+          </motion.span>
+        </span>
+      </a>
     </>
   );
 }
