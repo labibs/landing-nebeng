@@ -503,7 +503,7 @@ export default function Home() {
                 <span>{t("Total Toko")}</span>
                 <strong>{platformSummary ? formatCount(platformSummary.outletsCount) : "—"}</strong>
               </div>
-              <div className={`${styles.metricCard} ${styles.metricCardWide}`}>
+              <div className={styles.metricCard}>
                 <Package size={19} />
                 <span>{t("Total Produk")}</span>
                 <strong>{platformSummary ? formatCount(platformSummary.productsCount) : "—"}</strong>
