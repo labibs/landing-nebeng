@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import styles from "./ScreenshotShowcase.module.css";
 import Image from "next/image";
+import { useLanguage } from "../lib/LanguageContext";
 
 const slides = [
   {
@@ -36,11 +37,11 @@ const slides = [
   },
   {
     tag: "Fitur 03",
-    title: "Marketplace Outlet — Nitip Beliin",
+    title: "Market — Nitip Beliin",
     subtitle: "Outlet lokal masuk ekosistem titip beli",
-    desc: "Halaman Market menampilkan outlet pilihan dengan kategori Makanan, Obat, Sembako, dan lainnya. Warung yang belum digital tetap bisa masuk lewat model Kurir, Customer, atau Pemilik.",
+    desc: "Halaman Market menampilkan outlet dan produk berdasarkan kategori. Pengguna dapat mencari barang, membuka detail, dan menambahkan produk ke keranjang.",
     bullets: [
-      "🏪 Sistem Outlet 3 Model",
+      "🏪 Jelajahi outlet lokal",
       "🍱 Filter kategori: Makanan, Obat, Sembako",
       "📢 Jembatan digitalisasi UMKM informal",
     ],
@@ -53,11 +54,11 @@ const slides = [
     tag: "Fitur 04",
     title: "Chat In-App & Konfirmasi Deal",
     subtitle: "Nego tanpa keluar platform",
-    desc: "Pengguna dapat berinteraksi lewat chat in-app Numpak. Negosiasi harga, koordinasi titik jemput, hingga konfirmasi barang — semua dalam satu tempat yang aman.",
+    desc: "Pengguna dapat berinteraksi lewat chat in-app untuk membahas harga, titik jemput, dan detail deal.",
     bullets: [
       "💬 Chat langsung antar pengguna",
       "🔔 Notifikasi deal offer real-time",
-      "🔒 Riwayat chat tersimpan aman",
+      "🔒 Lihat riwayat percakapan",
     ],
     imgSrc: "/screenshots/ss-chat.jpeg",
     imgAlt: "Chat In-App Numpak",
@@ -67,11 +68,11 @@ const slides = [
     tag: "Fitur 05",
     title: "Transaksi Terlacak",
     subtitle: "Status deal jelas dari awal sampai selesai",
-    desc: "Setiap transaksi punya status jelas seperti Menunggu Bayar, Ready to Ship, Selesai, atau Dibatalkan. Data transaksi masuk ke dashboard agar admin dapat memantau aktivitas dan menangani sengketa.",
+    desc: "Pengguna dapat melihat detail dan status transaksi. Admin memiliki halaman untuk memantau dan mengelola transaksi.",
     bullets: [
-      "💳 Escrow disiapkan untuk fase produksi",
+      "💳 Cek tahapan pembayaran yang tersedia",
       "📦 Label OWNER & CARRIER per transaksi",
-      "📊 Riwayat lengkap dengan ekspor PDF",
+      "📊 Lihat riwayat transaksi",
     ],
     imgSrc: "/screenshots/ss-transaction.jpeg",
     imgAlt: "Halaman Transaksi Numpak",
@@ -79,9 +80,9 @@ const slides = [
   },
   {
     tag: "Fitur 06",
-    title: "7 Fitur dalam Satu Platform",
-    subtitle: "Ekosistem peer-to-peer terlengkap",
-    desc: "Dari Nitip Bawain, Nitip Beliin, Nyari Boncengan, Nyari Tukang, Dalam Perjalanan, Jualan Keliling, sampai Outlet — semua tersedia di satu ekosistem mobilitas komunitas.",
+    title: "Beragam Fitur dalam Satu Platform",
+    subtitle: "Satu aplikasi untuk berbagai kebutuhan",
+    desc: "Buat permintaan kirim atau belanja, cari boncengan atau tukang, bagikan perjalanan, kelola outlet, pantau jualan keliling, atau buat konten.",
     bullets: [
       "🧳 Nitip Bawain & Nitip Beliin",
       "🛵 Nyari Boncengan & Nyari Tukang",
@@ -107,27 +108,27 @@ const slides = [
   },
   {
     tag: "Fitur 08",
-    title: "Profil Verified Pro & Sistem Reputasi",
-    subtitle: "Trust by design, bukan sekadar janji",
-    desc: "Sistem reputasi Numpak membantu mengurangi risiko transaksi antar orang asing. XP, jumlah postingan, rating, dan galeri aktivitas membangun kepercayaan komunitas secara bertahap.",
+    title: "Profil Pengguna & Ulasan",
+    subtitle: "Kenali pengguna sebelum membuat deal",
+    desc: "Halaman profil menampilkan informasi pengguna dan aktivitas yang tersedia untuk membantu pengguna saling mengenal.",
     bullets: [
-      "⭐ Badge Verified Pro berbasis XP",
-      "📈 Review aktif terlacak",
-      "🖼️ Galeri aktivitas transparan",
+      "⭐ Lihat informasi profil",
+      "📈 Baca ulasan yang tersedia",
+      "🖼️ Jelajahi postingan pengguna",
     ],
     imgSrc: "/screenshots/ss-profile.jpeg",
-    imgAlt: "Profil Verified Pro Numpak",
+    imgAlt: "Profil Pengguna Numpak",
     accent: "#f59e0b",
   },
   {
     tag: "Fitur 09",
-    title: "Outlet Saya — Sistem Outlet 3 Model",
-    subtitle: "Warung offline masuk ekosistem digital",
-    desc: "Outlet bisa didaftarkan oleh Kurir, Pemilik, atau Customer setia. Warung konvensional yang pemiliknya belum melek teknologi tetap dapat muncul di marketplace Numpak.",
+    title: "Outlet Saya — Kelola Outlet",
+    subtitle: "Kelola outlet dan produk",
+    desc: "Pengguna dapat menambahkan outlet dan mengelola informasi serta produk yang ditampilkan di Market.",
     bullets: [
-      "🏪 3 model: Kurir / Pemilik / Customer",
+      "🏪 Tambahkan outlet ke Market",
       "🛍️ Kelola produk & harga langsung",
-      "📢 Slot promo Outlet Ads tersedia",
+      "📢 Tampilkan produk outlet di Market",
     ],
     imgSrc: "/screenshots/ss-outlet.jpeg",
     imgAlt: "Outlet Saya Numpak",
@@ -136,6 +137,7 @@ const slides = [
 ];
 
 export default function ScreenshotShowcase() {
+  const { t } = useLanguage();
   const [active, setActive] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
@@ -168,14 +170,13 @@ export default function ScreenshotShowcase() {
   return (
     <section className={styles.section} id="screenshots">
       <div className={styles.header}>
-        <div className={styles.eyebrow}>Eksplorasi Antarmuka</div>
+        <div className={styles.eyebrow}>{t("Eksplorasi Antarmuka")}</div>
         <h2 className={styles.title}>
-          Prototype Interaktif.{" "}
-          <span className={styles.accent}>Siap diuji.</span>
+          {t("Prototype Interaktif.")} {" "}
+          <span className={styles.accent}>{t("Siap diuji.")}</span>
         </h2>
         <p className={styles.desc}>
-          Setiap layar di bawah menggambarkan alur prototype live — dari
-          pencarian rute, chat, deal, transaksi, sampai reputasi pengguna.
+          {t("Setiap layar di bawah menggambarkan alur prototype live — dari pencarian rute, chat, deal, transaksi, sampai reputasi pengguna.")}
         </p>
       </div>
 
@@ -188,15 +189,15 @@ export default function ScreenshotShowcase() {
             className={styles.tag}
             style={{ background: slide.accent + "22", color: slide.accent }}
           >
-            {slide.tag}
+            {t(slide.tag)}
           </div>
-          <h3 className={styles.slideTitle}>{slide.title}</h3>
-          <p className={styles.slideSubtitle}>{slide.subtitle}</p>
-          <p className={styles.slideDesc}>{slide.desc}</p>
+          <h3 className={styles.slideTitle}>{t(slide.title)}</h3>
+          <p className={styles.slideSubtitle}>{t(slide.subtitle)}</p>
+          <p className={styles.slideDesc}>{t(slide.desc)}</p>
           <ul className={styles.bullets}>
             {slide.bullets.map((b, i) => (
               <li key={i} className={styles.bullet}>
-                {b}
+                {t(b)}
               </li>
             ))}
           </ul>
@@ -205,7 +206,7 @@ export default function ScreenshotShowcase() {
             <button
               className={styles.navBtn}
               onClick={prev}
-              aria-label="Sebelumnya"
+              aria-label={t("Sebelumnya")}
             >
               ←
             </button>
@@ -223,7 +224,7 @@ export default function ScreenshotShowcase() {
             <button
               className={styles.navBtn}
               onClick={next}
-              aria-label="Berikutnya"
+              aria-label={t("Berikutnya")}
             >
               →
             </button>

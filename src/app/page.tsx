@@ -4,9 +4,12 @@ import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
+  Bot,
   Handshake,
+  Languages,
   Package,
   ReceiptText,
+  Sparkles,
   Store,
   TrendingUp,
   Users,
@@ -17,22 +20,33 @@ import styles from "./page.module.css";
 import ScreenshotShowcase from "./ScreenshotShowcase";
 import DashboardShowcase from "./DashboardShowcase";
 import Image from "next/image";
+import { useLanguage } from "../lib/LanguageContext";
 
 const HERO_PHRASES = [
-  "Nitip Beli Sesuatu.",
-  "Nitip Kirim Sesuatu.",
+  "Nitip Beliin.",
+  "Nitip Bawain.",
   "Cari Boncengan.",
   "Cari Tukang Lokal.",
-  "Tanpa Armada Baru.",
-  "Tanpa Gudang.",
-  "Tanpa Sortir.",
-  "Tanpa Transit.",
-  "Tanpa Biaya Balik.",
-  "Langsung ke Tujuan.",
+  "Dalam Perjalanan.",
+  "Jualan Keliling.",
+  "Kelola Outlet.",
+  "Buat Postingan dengan AI.",
 ];
-const APP_CTA_LABEL = "Coba Aplikasi";
 
 export default function Home() {
+  const { language, setLanguage, t } = useLanguage();
+  const appCtaLabel = t("Coba Aplikasi");
+  const [platformSummary, setPlatformSummary] = useState<{
+    users: number;
+    posts: number;
+    transactionsCount: number;
+    revenue: number;
+    dealsCount: number;
+    outletsCount: number;
+    productsCount: number;
+    updatedAt: string;
+  } | null>(null);
+  const [summaryStatus, setSummaryStatus] = useState<"loading" | "ready" | "error">("loading");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [heroPhraseIndex, setHeroPhraseIndex] = useState(0);
@@ -55,6 +69,33 @@ export default function Home() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const apiBaseUrl = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://labibs.sakte.id/api").replace(/\/$/, "");
+
+    fetch(`${apiBaseUrl}/platform/summary`, {
+      headers: { Accept: "application/json" },
+      cache: "no-store",
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`Summary request failed: ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        if (cancelled) return;
+        setPlatformSummary(data);
+        setSummaryStatus("ready");
+      })
+      .catch((error) => {
+        console.error("Could not load public platform summary:", error);
+        if (!cancelled) setSummaryStatus("error");
+      });
+
+    return () => {
+      cancelled = true;
     };
   }, []);
 
@@ -89,9 +130,9 @@ export default function Home() {
 
     const typeLabel = () => {
       characterIndex += 1;
-      setTypedAppLabel(APP_CTA_LABEL.slice(0, characterIndex));
+      setTypedAppLabel(appCtaLabel.slice(0, characterIndex));
 
-      if (characterIndex < APP_CTA_LABEL.length) {
+      if (characterIndex < appCtaLabel.length) {
         timeout = setTimeout(typeLabel, 85);
         return;
       }
@@ -105,7 +146,7 @@ export default function Home() {
 
     timeout = setTimeout(typeLabel, 500);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [appCtaLabel]);
 
   const toggleAcc = (e: React.MouseEvent<HTMLDivElement>) => {
     const header = e.currentTarget;
@@ -130,14 +171,31 @@ export default function Home() {
   };
 
   const menuItems = [
-    { name: "Home", href: "#" },
-    { name: "Preview App", href: "#screenshots" },
+    { name: "Beranda", href: "#" },
+    { name: "Pratinjau Aplikasi", href: "#screenshots" },
     { name: "Fitur Platform", href: "#showcase" },
-    { name: "Admin Dashboard", href: "#dashboard" },
+    { name: "Dashboard Admin", href: "#dashboard" },
+    { name: "Asisten di Aplikasi", href: "#ai-assistants" },
     { name: "Cara Kerja", href: "#how" },
-    { name: "Model Bisnis", href: "#business" },
-    { name: "FAQ & Safety", href: "#faq" },
+    { name: "Fitur yang Tersedia", href: "#business" },
+    { name: "Bantuan", href: "#faq" },
   ];
+  const numberLocale = language === "en" ? "en-US" : "id-ID";
+  const formatCount = (value: number | undefined) =>
+    new Intl.NumberFormat(numberLocale).format(value ?? 0);
+  const formatCurrency = (value: number | undefined) =>
+    new Intl.NumberFormat(numberLocale, {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0,
+    }).format(value ?? 0);
+  const summaryChartValues = platformSummary
+    ? [platformSummary.users, platformSummary.posts, platformSummary.transactionsCount, platformSummary.dealsCount, platformSummary.outletsCount, platformSummary.productsCount]
+    : [];
+  const chartMax = Math.max(1, ...summaryChartValues);
+  const summaryUpdatedLabel = platformSummary?.updatedAt
+    ? new Date(platformSummary.updatedAt).toLocaleTimeString(numberLocale, { hour: "2-digit", minute: "2-digit" })
+    : "";
 
   return (
     <>
@@ -157,10 +215,21 @@ export default function Home() {
         </div>
 
         <button
+          type="button"
+          className={styles.languageToggle}
+          onClick={() => setLanguage(language === "id" ? "en" : "id")}
+          aria-label={language === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia"}
+          title={language === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia"}
+        >
+          <Languages size={16} aria-hidden="true" />
+          <span>{language === "id" ? "ID" : "EN"}</span>
+        </button>
+
+        <button
           className={styles.menuTrigger}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <span>MENU</span>
+          <span>{t("MENU")}</span>
           <div
             className={
               styles.hamburger + (isMenuOpen ? " " + styles.hamburgerOpen : "")
@@ -180,7 +249,7 @@ export default function Home() {
       >
         {menuItems.map((item, idx) => (
           <a key={idx} href={item.href} onClick={() => setIsMenuOpen(false)}>
-            {item.name}
+            {t(item.name)}
           </a>
         ))}
         <button
@@ -188,7 +257,7 @@ export default function Home() {
           style={{ marginTop: "40px" }}
           onClick={() => window.open("https://numpak.sakte.id/", "_blank")}
         >
-          Coba Prototype
+          {t("Coba Prototype")}
         </button>
       </div>
 
@@ -208,19 +277,15 @@ export default function Home() {
         <div data-animate className={styles.heroContent}>
           <div className={styles.heroLeft}>
             <h2 className={styles.heroH1}>
-              Manfaatkan Perjalanan Searah, <br />
+              {t("Manfaatkan Perjalanan Searah,")} <br />
               <span className={styles.heroRotator}>
                 <span key={heroPhraseIndex} className={styles.heroRotatorText}>
-                  {HERO_PHRASES[heroPhraseIndex]}
+                  {t(HERO_PHRASES[heroPhraseIndex])}
                 </span>
               </span>
             </h2>
             <p className={styles.heroDesc}>
-              Numpak adalah platform peer-to-peer untuk memanfaatkan perjalanan
-              yang sudah terjadi: bawain barang, beliin sesuatu, cari
-              boncengan, sampai kebutuhan lokal lain. Bisa untuk dalam kota,
-              antar kota, pulang kerja, naik kereta, hingga perjalanan ke luar
-              negeri selama ada orang yang searah.
+              {t("Numpak adalah platform peer-to-peer untuk memanfaatkan perjalanan yang sudah terjadi: bawain barang, beliin sesuatu, cari boncengan, sampai kebutuhan lokal lain. Bisa untuk dalam kota, antar kota, pulang kerja, naik kereta, hingga perjalanan ke luar negeri selama ada orang yang searah.")}
             </p>
             <motion.div
               className={styles.heroButtons}
@@ -236,7 +301,7 @@ export default function Home() {
                 whileHover={{ y: -4, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
               >
-                Coba Sekarang →
+                {t("Coba Sekarang →")}
               </motion.a>
               <motion.a
                 href="#showcase"
@@ -244,7 +309,7 @@ export default function Home() {
                 whileHover={{ y: -4, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
               >
-                Pelajari Fitur
+                {t("Pelajari Fitur")}
               </motion.a>
             </motion.div>
             <div className={styles.heroTrust}>
@@ -267,7 +332,7 @@ export default function Home() {
                 </div>
 
                 <div className={styles.trustText}>
-                  Prototype live <strong>numpak.sakte.id</strong>
+                  {t("Aplikasi Numpak")} <strong>numpak.sakte.id</strong>
                 </div>
               </div>
             </div>
@@ -276,11 +341,11 @@ export default function Home() {
       </header>
 
       <div className={styles.trusted}>
-        <div className={styles.trustedLabel}>Untuk Semua Perjalanan</div>
+        <div className={styles.trustedLabel}>{t("Untuk Semua Perjalanan")}</div>
         <div className={styles.trustedLogos}>
-          <span>Kirim Mendesak</span>
-          <span>Orang yang Searah</span>
-          <span>Outlet & Layanan Lokal</span>
+          <span>{t("Kirim Mendesak")}</span>
+          <span>{t("Orang yang Searah")}</span>
+          <span>{t("Outlet & Layanan Lokal")}</span>
         </div>
       </div>
 
@@ -289,21 +354,18 @@ export default function Home() {
 
       <section className={styles.showcase} id="showcase">
         <div data-animate>
-          <div className={styles.eyebrow}>Platform Fitur</div>
-          <h2 className={styles.sectionTitle}>Problem–Solution Mapping</h2>
+          <div className={styles.eyebrow}>{t("Platform Fitur")}</div>
+          <h2 className={styles.sectionTitle}>{t("Yang Bisa Dilakukan di Numpak")}</h2>
           <p className={styles.sectionDesc}>
-            Memetakan kebutuhan time-sensitive ke fitur yang sudah ada di
-            prototype Numpak, tanpa batas profesi, jarak, atau moda.
+            {t("Memetakan kebutuhan time-sensitive ke fitur yang sudah ada di prototype Numpak, tanpa batas profesi, jarak, atau moda.")}
           </p>
         </div>
         <div className={styles.bentoGrid}>
           <div className={styles.bento + " " + styles.bentoA} data-animate>
             <div className={styles.bentoIcon + " " + styles.iconTeal}>📍</div>
-            <h3>Nitip Bawain</h3>
+            <h3>{t("Nitip Bawain")}</h3>
             <p>
-              Menjawab ketiadaan cara terstruktur untuk menemukan orang yang
-              sedang searah. Pengguna memasukkan rute, kebutuhan, dan waktu;
-              orang yang searah muncul di feed untuk lanjut chat dan deal.
+              {t("Menjawab ketiadaan cara terstruktur untuk menemukan orang yang sedang searah. Pengguna memasukkan rute, kebutuhan, dan waktu; orang yang searah muncul di feed untuk lanjut chat dan deal.")}
             </p>
           </div>
           <div
@@ -312,11 +374,9 @@ export default function Home() {
             style={{ transitionDelay: "0.1s" }}
           >
             <div className={styles.bentoIcon + " " + styles.iconAmber}>🛡️</div>
-            <h3>Trust Architecture</h3>
+            <h3>{t("Profil & Aktivitas")}</h3>
             <p>
-              Kepercayaan dibangun melalui escrow payment, rating dua arah,
-              badge Verified Pro berbasis XP, dan rencana polis digital per
-              transaksi bersama mitra asuransi berlisensi OJK.
+              {t("Lihat informasi profil dan aktivitas yang tersedia untuk mengenal pengguna lain sebelum memulai percakapan atau deal.")}
             </p>
           </div>
           <div
@@ -325,11 +385,9 @@ export default function Home() {
             style={{ transitionDelay: "0.15s" }}
           >
             <div className={styles.bentoIcon + " " + styles.iconBlue}>🛒</div>
-            <h3>Nitip Beliin</h3>
+            <h3>{t("Nitip Beliin")}</h3>
             <p>
-              Titip belanja lintas area dengan Sistem Outlet 3 Model. Membawa
-              warung offline yang tidak melek digital sekalipun masuk ke
-              ekosistem logistik via kurir atau pelanggan setianya.
+              {t("Jelajahi outlet dan produk di Market, gunakan keranjang, atau tambahkan outlet dan produk melalui aplikasi.")}
             </p>
           </div>
           <div
@@ -338,13 +396,34 @@ export default function Home() {
             style={{ transitionDelay: "0.2s" }}
           >
             <div className={styles.bentoIcon + " " + styles.iconRed}>✨</div>
-            <h3>Community-Driven</h3>
+            <h3>{t("Community-Driven")}</h3>
             <p>
-              Mengaktifkan kapasitas perjalanan yang sudah terjadi. Numpak
-              bisa dipakai saat naik kendaraan pribadi, kereta, bus, atau
-              travelling; selama searah, perjalanan dapat sekalian bawain
-              titipan, beliin oleh-oleh, atau bantu kebutuhan lain.
+              {t("Mengaktifkan kapasitas perjalanan yang sudah terjadi. Numpak bisa dipakai saat naik kendaraan pribadi, kereta, bus, atau travelling; selama searah, perjalanan dapat sekalian bawain titipan, beliin oleh-oleh, atau bantu kebutuhan lain.")}
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.showcase} id="ai-assistants">
+        <div data-animate>
+          <div className={styles.eyebrow}>{t("Asisten di Aplikasi")}</div>
+          <h2 className={styles.sectionTitle}>{t("AI Agent Numpak: dari percakapan ke tindakan")}</h2>
+          <p className={styles.sectionDesc}>
+            {t("Ceritakan tujuanmu dengan bahasa sehari-hari. AI Agent Numpak memahami jenis kebutuhan, menanyakan informasi yang masih kurang, lalu menyusun postingan terstruktur yang siap ditinjau.")}
+          </p>
+        </div>
+        <div className={styles.bentoGrid}>
+          <div className={`${styles.bento} ${styles.bentoA}`} data-animate>
+            <div className={`${styles.bentoIcon} ${styles.iconTeal}`}><Sparkles size={24} /></div>
+            <h3>{t("Cara kerja AI Agent")}</h3>
+            <p>{t("Agent mengenali jenis permintaan, mengumpulkan dan memeriksa kelengkapan detail, kemudian menyiapkan pratinjau dalam format postingan Numpak. Setelah pengguna menyetujui, agent mengirim data untuk membuat postingan di aplikasi.")}</p>
+            <p className={styles.aiNote}>{t("Bisa membantu permintaan kirim dan belanja, boncengan, jasa lokal, perjalanan, jualan keliling, serta draf caption konten. AI membalas dalam Bahasa Indonesia; untuk konten, agent menyiapkan caption tanpa mengunggah video. Pengguna tetap memegang kendali sebelum postingan dibuat.")}</p>
+          </div>
+          <div className={`${styles.bento} ${styles.bentoB}`} data-animate>
+            <div className={`${styles.bentoIcon} ${styles.iconBlue}`}><Bot size={24} /></div>
+            <h3>{t("Bantuan pencarian di feed")}</h3>
+            <p>{t("Demo feed mencocokkan kata kunci dengan postingan yang sudah dimuat dan menampilkan hingga lima rekomendasi.")}</p>
+            <p className={styles.aiNote}>{t("Fitur feed ini masih berupa pencocokan kata kunci, bukan AI Agent.")}</p>
           </div>
         </div>
       </section>
@@ -353,11 +432,16 @@ export default function Home() {
         <div className={styles.statsDashboard} data-animate>
           <div className={styles.statsHeader}>
             <div>
-              <div className={styles.statsKicker}>Ringkasan Platform</div>
-              <h2>Aktivitas Numpak</h2>
+              <div className={styles.statsKicker}>{t("Ringkasan Platform")}</div>
+              <h2>{t("Aktivitas Numpak")}</h2>
             </div>
             <div className={styles.statsLive}>
-              <span></span> Data Terkini
+              <span></span>{" "}
+              {summaryStatus === "loading"
+                ? t("Memuat data...")
+                : summaryStatus === "ready"
+                  ? `${t("Data aplikasi")}${summaryUpdatedLabel ? ` · ${summaryUpdatedLabel}` : ""}`
+                  : t("Data belum tersedia")}
             </div>
           </div>
 
@@ -367,55 +451,62 @@ export default function Home() {
                 <div className={styles.panelIcon}>
                   <WalletCards size={20} strokeWidth={1.8} />
                 </div>
-                <span>Total Pendapatan</span>
+                <span>{t("Total Nilai Transaksi")}</span>
                 <ArrowUpRight size={19} />
               </div>
-              <div className={styles.revenueAmount}>Rp630.000</div>
-              <div className={styles.revenueCaption}>
-                Tercatat dari 4 transaksi yang telah diselesaikan.
+              <div className={styles.revenueAmount}>
+                {platformSummary ? formatCurrency(platformSummary.revenue) : "—"}
               </div>
-              <div className={styles.activityChart} aria-label="Visualisasi aktivitas platform">
-                {[44, 65, 52, 82, 60, 94, 72, 86].map((height, index) => (
+              <div className={styles.revenueCaption}>
+                {t("Akumulasi gross amount transaksi yang tercatat.")}
+              </div>
+              <div className={styles.activityChart} aria-label={t("Perbandingan jumlah data platform")}>
+                {summaryChartValues.map((value, index) => (
                   <motion.span
                     key={index}
                     initial={{ scaleY: 0 }}
                     whileInView={{ scaleY: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.45, delay: index * 0.06 }}
-                    style={{ height: `${height}%` }}
+                    style={{ height: `${value === 0 ? 3 : Math.max(8, (value / chartMax) * 100)}%` }}
                   />
                 ))}
               </div>
               <div className={styles.chartCaption}>
-                <TrendingUp size={15} /> Aktivitas ekosistem
+                <TrendingUp size={15} /> {t("Jumlah data platform")}
               </div>
             </div>
 
             <div className={styles.metricsGrid}>
               <div className={styles.metricCard}>
                 <Users size={19} />
-                <span>Total Pengguna</span>
-                <strong>11</strong>
+                <span>{t("Total Pengguna")}</span>
+                <strong>{platformSummary ? formatCount(platformSummary.users) : "—"}</strong>
+              </div>
+              <div className={styles.metricCard}>
+                <Package size={19} />
+                <span>{t("Total Postingan")}</span>
+                <strong>{platformSummary ? formatCount(platformSummary.posts) : "—"}</strong>
               </div>
               <div className={styles.metricCard}>
                 <ReceiptText size={19} />
-                <span>Total Transaksi</span>
-                <strong>4</strong>
+                <span>{t("Total Transaksi")}</span>
+                <strong>{platformSummary ? formatCount(platformSummary.transactionsCount) : "—"}</strong>
               </div>
               <div className={styles.metricCard}>
                 <Handshake size={19} />
-                <span>Total Deal</span>
-                <strong>32</strong>
+                <span>{t("Total Deal")}</span>
+                <strong>{platformSummary ? formatCount(platformSummary.dealsCount) : "—"}</strong>
               </div>
               <div className={styles.metricCard}>
                 <Store size={19} />
-                <span>Total Toko</span>
-                <strong>9</strong>
+                <span>{t("Total Toko")}</span>
+                <strong>{platformSummary ? formatCount(platformSummary.outletsCount) : "—"}</strong>
               </div>
               <div className={`${styles.metricCard} ${styles.metricCardWide}`}>
                 <Package size={19} />
-                <span>Total Produk</span>
-                <strong>8</strong>
+                <span>{t("Total Produk")}</span>
+                <strong>{platformSummary ? formatCount(platformSummary.productsCount) : "—"}</strong>
               </div>
             </div>
           </div>
@@ -424,17 +515,15 @@ export default function Home() {
 
       <section className={styles.howSection} id="how">
         <div data-animate>
-          <div className={styles.eyebrow}>Cara Kerja</div>
-          <h2 className={styles.sectionTitle}>Mekanisme Solusi End-to-End</h2>
+          <div className={styles.eyebrow}>{t("Cara Kerja")}</div>
+          <h2 className={styles.sectionTitle}>{t("Dari Postingan ke Transaksi")}</h2>
         </div>
         <div className={styles.stepsGrid}>
           <div className={styles.step} data-animate>
             <div className={styles.stepNum}>01</div>
-            <h3>Input & Matching</h3>
+            <h3>{t("Buat Postingan & Cari")}</h3>
             <p>
-              Pengguna memasukkan rute, detail kebutuhan, ukuran atau kapasitas,
-              dan waktu. Sistem menampilkan posting perjalanan yang searah
-              berdasarkan asal, tujuan, waktu, kapasitas, dan rating.
+              {t("Buat postingan dengan rute, kebutuhan, dan waktu. Cari postingan yang sesuai di feed.")}
             </p>
           </div>
           <div
@@ -443,11 +532,9 @@ export default function Home() {
             style={{ transitionDelay: "0.1s" }}
           >
             <div className={styles.stepNum}>02</div>
-            <h3>Transaksi Escrow</h3>
+            <h3>{t("Chat & Buat Deal")}</h3>
             <p>
-              Negosiasi detail via chat in-app. Midtrans sudah berada di
-              sandbox; saat produksi, dana ditahan escrow dan asuransi
-              transaksi dapat diaktifkan saat checkout.
+              {t("Bahas detail kebutuhan melalui chat in-app, lalu sepakati deal dan ikuti instruksi transaksi yang tersedia di aplikasi.")}
             </p>
           </div>
           <div
@@ -456,11 +543,9 @@ export default function Home() {
             style={{ transitionDelay: "0.2s" }}
           >
             <div className={styles.stepNum}>03</div>
-            <h3>Output & Reputasi</h3>
+            <h3>{t("Selesaikan Transaksi")}</h3>
             <p>
-              Setelah barang diterima, status deal selesai, dana dilepas ke
-              orang yang membantu, dan rating dua arah membangun reputasi
-              komunitas.
+              {t("Pantau status transaksi di aplikasi dan selesaikan langkah konfirmasi yang tersedia.")}
             </p>
           </div>
         </div>
@@ -469,43 +554,36 @@ export default function Home() {
       <section className={styles.bizSection} id="business">
         <div className={styles.bizInner}>
           <div data-animate>
-            <div className={styles.eyebrow}>Model Bisnis</div>
+            <div className={styles.eyebrow}>{t("Fitur yang Tersedia")}</div>
             <h2 className={styles.sectionTitle}>
-              Revenue Streams & Sustainability
+              {t("Satu Aplikasi untuk Berbagai Kebutuhan")}
             </h2>
             <div className={styles.accordion}>
               <div className={styles.accItem}>
                 <div className={styles.accHeader} onClick={toggleAcc}>
-                  <span>Service Fee per Transaksi</span>
+                  <span>{t("Permintaan & Bantuan Perjalanan")}</span>
                   <span className={styles.collapseIcon}>+</span>
                 </div>
                 <div className={styles.accBody}>
-                  Komisi 8–12% dari setiap transaksi selesai. Menghasilkan
-                  estimasi Rp 3.200–4.800 pada rata-rata transaksi Rp 40.000.
-                  Platform hanya mendapat fee saat transaksi berhasil.
+                  {t("Buat permintaan untuk mengirim barang, meminta bantuan belanja, mencari boncengan, atau mencari tukang lokal.")}
                 </div>
               </div>
               <div className={styles.accItem}>
                 <div className={styles.accHeader} onClick={toggleAcc}>
-                  <span>Premium Membership</span>
+                  <span>{t("Market & Outlet")}</span>
                   <span className={styles.collapseIcon}>+</span>
                 </div>
                 <div className={styles.accBody}>
-                  {" "}
-                  Rp 29.000/bulan untuk limit posting rute lebih banyak dan
-                  prioritas tampil di feed. Target 10% MAU berlangganan sebagai
-                  recurring revenue.
+                  {t("Jelajahi produk, gunakan keranjang, dan kelola outlet serta produk melalui fitur yang tersedia di aplikasi.")}
                 </div>
               </div>
               <div className={styles.accItem}>
                 <div className={styles.accHeader} onClick={toggleAcc}>
-                  <span>Outlet Ads</span>
+                  <span>{t("Chat & Transaksi")}</span>
                   <span className={styles.collapseIcon}>+</span>
                 </div>
                 <div className={styles.accBody}>
-                  Merchant dapat mempromosikan toko di feed seharga Rp
-                  50.000–200.000 per promo per minggu untuk menjangkau lebih
-                  banyak orang yang searah dan pelanggan.
+                  {t("Hubungi pengguna melalui chat, sepakati detail deal, dan pantau transaksi dari halaman transaksi.")}
                 </div>
               </div>
             </div>
@@ -519,12 +597,12 @@ export default function Home() {
                 💸
               </div>
               <div>
-                <div className={styles.bizCardTitle}>Service Fee</div>
+                <div className={styles.bizCardTitle}>{t("Buat Postingan")}</div>
                 <div className={styles.bizCardSub}>
-                  Target 60% Total Revenue
+                  {t("Bagikan kebutuhan atau perjalanan")}
                 </div>
               </div>
-              <div className={styles.bizPct}>8-12%</div>
+              <div className={styles.bizPct}>01</div>
             </div>
             <div className={styles.bizCard}>
               <div
@@ -534,10 +612,10 @@ export default function Home() {
                 🏢
               </div>
               <div>
-                <div className={styles.bizCardTitle}>B2B Enterprise</div>
-                <div className={styles.bizCardSub}>Post-MVP UMKM Solution</div>
+                <div className={styles.bizCardTitle}>{t("Temukan Kecocokan")}</div>
+                <div className={styles.bizCardSub}>{t("Cari post atau produk yang sesuai")}</div>
               </div>
-              <div className={styles.bizPct}>Custom</div>
+              <div className={styles.bizPct}>02</div>
             </div>
           </div>
         </div>
@@ -546,54 +624,43 @@ export default function Home() {
       <section className={styles.faqSection} id="faq">
         <div className={styles.faqInner}>
           <div data-animate>
-            <div className={styles.eyebrow}>FAQ</div>
+            <div className={styles.eyebrow}>{t("FAQ")}</div>
             <h2 className={styles.sectionTitle}>
-              Pertanyaan Populer & Keamanan
+              {t("Pertanyaan Populer")}
             </h2>
           </div>
           <div className={styles.faqList} data-animate>
             <div className={styles.faqItem} onClick={toggleFaq}>
               <div className={styles.faqQ}>
                 <span>
-                  <span className={styles.faqNum}>01.</span> Kapan dana
-                  dicairkan ke orang yang membantu?
+                  <span className={styles.faqNum}>01.</span> {t("Bagaimana cara memulai transaksi?")}
                 </span>
                 <span className={styles.collapseIcon}>+</span>
               </div>
               <div className={styles.faqA}>
-                Pada versi produksi, dana escrow dicairkan ke orang yang
-                membantu setelah penerima mengonfirmasi kebutuhan selesai.
-                Integrasi payment saat ini sudah disiapkan di sandbox untuk
-                pilot berikutnya.
+                {t("Buat atau pilih postingan, lanjutkan percakapan di chat, lalu ikuti detail deal dan instruksi pembayaran yang muncul di aplikasi.")}
               </div>
             </div>
             <div className={styles.faqItem} onClick={toggleFaq}>
               <div className={styles.faqQ}>
                 <span>
-                  <span className={styles.faqNum}>02.</span> Bagaimana
-                  perlindungan data pribadi?
+                  <span className={styles.faqNum}>02.</span> {t("Fitur apa saja yang tersedia?")}
                 </span>
                 <span className={styles.collapseIcon}>+</span>
               </div>
               <div className={styles.faqA}>
-                Prototype menggunakan Clerk untuk autentikasi, two-step
-                verification, device tracking, dan Supabase Row Level Security.
-                Verifikasi KTP otomatis dan audit keamanan disiapkan untuk fase
-                produksi.
+                {t("Aplikasi saat ini menyediakan feed, postingan, chat, deal, transaksi, Market, outlet, serta fitur terkait perjalanan dan layanan lokal.")}
               </div>
             </div>
             <div className={styles.faqItem} onClick={toggleFaq}>
               <div className={styles.faqQ}>
                 <span>
-                  <span className={styles.faqNum}>03.</span> Apa itu Sistem
-                  Outlet 3 Model?
+                  <span className={styles.faqNum}>03.</span> {t("Bagaimana cara melihat status transaksi?")}
                 </span>
                 <span className={styles.collapseIcon}>+</span>
               </div>
               <div className={styles.faqA}>
-                Inovasi inklusi digital dimana warung bisa didaftarkan oleh
-                Kurir, Pemilik, atau Customer agar masuk ke ekosistem logistik
-                digital Numpak tanpa harus memiliki perangkat digital sendiri.
+                {t("Buka halaman Transaksi di aplikasi untuk melihat informasi dan status transaksi yang terkait dengan akunmu.")}
               </div>
             </div>
           </div>
@@ -614,33 +681,30 @@ export default function Home() {
               />
             </div>
             <p className={styles.footerDesc}>
-              Platform peer-to-peer untuk kirim, beli, bonceng, dan bantu
-              kebutuhan searah melalui perjalanan yang sudah terjadi. Hadir
-              untuk siapa pun yang ingin memanfaatkan perjalanan dengan lebih
-              praktis dan saling membantu.
+              {t("Platform peer-to-peer untuk kirim, beli, bonceng, dan bantu kebutuhan searah melalui perjalanan yang sudah terjadi. Hadir untuk siapa pun yang ingin memanfaatkan perjalanan dengan lebih praktis dan saling membantu.")}
             </p>
           </div>
           <div className={styles.footerCol}>
-            <h4>Platform</h4>
-            <a href="#showcase">Fitur Utama</a>
-            <a href="#dashboard">Admin Panel</a>
-            <a href="#how">Alur Kerja</a>
+            <h4>{t("Platform")}</h4>
+            <a href="#showcase">{t("Fitur Utama")}</a>
+            <a href="#dashboard">{t("Admin Panel")}</a>
+            <a href="#how">{t("Alur Kerja")}</a>
           </div>
           <div className={styles.footerCol}>
-            <h4>Resources</h4>
-            <a href="#business">Model Bisnis</a>
-            <a href="#faq">Pusat Bantuan</a>
+            <h4>{t("Sumber")}</h4>
+            <a href="#business">{t("Fitur yang Tersedia")}</a>
+            <a href="#faq">{t("Pusat Bantuan")}</a>
             <a href="https://numpak.sakte.id/" target="_blank" rel="noreferrer">
-              Live Demo
+              {t("Live Demo")}
             </a>
           </div>
           <div className={styles.footerCol}>
-            <h4>Corporate</h4>
+            <h4>{t("Perusahaan")}</h4>
             <a href="https://sakte.id" target="_blank">
               SAKTE.ID
             </a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+            <a href="#">{t("Privacy Policy")}</a>
+            <a href="#">{t("Terms of Service")}</a>
           </div>
         </div>
         <div
@@ -659,7 +723,7 @@ export default function Home() {
         className={styles.appBubble}
         target="_blank"
         rel="noreferrer"
-        aria-label="Coba aplikasi Numpak"
+        aria-label={t("Coba Aplikasi")}
       >
         <span className={styles.appBubbleIcon} aria-hidden="true">
           <Image

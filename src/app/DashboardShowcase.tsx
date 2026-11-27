@@ -3,17 +3,18 @@
 import { useState, useEffect, useCallback } from "react";
 import styles from "./DashboardShowcase.module.css";
 import Image from "next/image";
+import { useLanguage } from "../lib/LanguageContext";
 
 const slides = [
   {
     tag: "Admin 01",
     title: "Dashboard Utama",
-    subtitle: "Pantau performa platform secara real-time",
-    desc: "Ringkasan data penting mulai dari total pengguna, postingan aktif, deal uji coba, hingga analisis transaksi dalam satu tampilan dashboard yang intuitif.",
+    subtitle: "Ringkasan aktivitas aplikasi",
+    desc: "Dashboard admin menampilkan ringkasan pengguna, postingan, pendapatan, deal, dan transaksi berdasarkan data aplikasi.",
     bullets: [
-      "📈 Grafik analisis transaksi otomatis",
-      "👥 Monitor jumlah pengguna & deal uji coba",
-      "🔔 Akses cepat ke notifikasi & bantuan chat",
+      "📈 Ringkasan metrik aplikasi",
+      "👥 Lihat pengguna, postingan, dan deal",
+      "🧾 Pantau transaksi dan pendapatan",
     ],
     imgSrc: "/screenshots/ssn-dashboard-1.png",
     imgAlt: "Dashboard Admin Numpak",
@@ -23,11 +24,11 @@ const slides = [
     tag: "Admin 02",
     title: "Manajemen Pengguna",
     subtitle: "Kelola basis data pengguna dengan detail",
-    desc: "Sistem tabel untuk memantau data pengguna, peran User/Admin, hingga status verifikasi Clerk ID secara transparan.",
+    desc: "Halaman admin menampilkan daftar pengguna dan menyediakan pencarian serta tindakan pengelolaan akun.",
     bullets: [
       "🔍 Pencarian & filter pengguna cepat",
-      "🛠️ Ubah peran & kelola akses akun",
-      "📋 Log aktivitas pengguna terlacak",
+      "🛠️ Pilih tindakan pengelolaan pengguna",
+      "📋 Lihat informasi akun",
     ],
     imgSrc: "/screenshots/ssn-dashboard-2.png",
     imgAlt: "Manajemen Pengguna Admin",
@@ -37,11 +38,11 @@ const slides = [
     tag: "Admin 03",
     title: "Toko & Produk",
     subtitle: "Eksplorasi ekosistem outlet lokal",
-    desc: "Kelola daftar toko dan produk yang terdaftar di platform. Pantau siapa pemiliknya, status outlet, hingga detail item yang dijual.",
+    desc: "Halaman admin menyediakan daftar outlet dan produk yang terdaftar di platform.",
     bullets: [
       "🏪 Kontrol penuh atas listing outlet",
-      "🍱 Pantau stok & detail produk UMKM",
-      "✅ Verifikasi status outlet (Kurir/Pemilik)",
+      "🍱 Lihat informasi produk",
+      "✅ Kelola data outlet",
     ],
     imgSrc: "/screenshots/ssn-dashboard-3.png",
     imgAlt: "Manajemen Toko & Produk",
@@ -50,12 +51,12 @@ const slides = [
   {
     tag: "Admin 04",
     title: "Riwayat Aktivitas & Transaksi",
-    subtitle: "Rekam jejak deal & pengiriman",
-    desc: "Pantau setiap transaksi dan kesepakatan yang terjadi. Lengkap dengan status pembayaran, rute perjalanan, hingga ekspor data ke PDF.",
+    subtitle: "Lihat transaksi dan deal",
+    desc: "Halaman admin menampilkan daftar transaksi dan deal untuk membantu memantau aktivitas yang berjalan.",
     bullets: [
-      "💳 Monitor status pembayaran & escrow",
-      "📍 Lacak rute deal (Asal → Tujuan)",
-      "📄 Ekspor riwayat ke PDF untuk laporan",
+      "💳 Lihat detail transaksi",
+      "📍 Periksa status dan rute yang tersedia",
+      "🤝 Tinjau daftar deal",
     ],
     imgSrc: "/screenshots/ssn-dashboard-4.png",
     imgAlt: "Riwayat Transaksi Admin",
@@ -65,7 +66,7 @@ const slides = [
     tag: "Admin 05",
     title: "Manajemen Postingan",
     subtitle: "Kontrol feed rute & perjalanan",
-    desc: "Pantau semua postingan perjalanan yang aktif. Admin dapat melihat detail rute, tipe layanan, hingga menghapus postingan jika melanggar ketentuan.",
+    desc: "Halaman admin menyediakan daftar postingan beserta detail yang dapat ditinjau.",
     bullets: [
       "📍 Detail rute keberangkatan & tujuan",
       "🚦 Filter tipe: Perjalanan / Cari Boncengan",
@@ -323,6 +324,7 @@ function AppleMonitorMockup({
 }
 
 export default function DashboardShowcase() {
+  const { t } = useLanguage();
   const [active, setActive] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [direction, setDirection] = useState("next");
@@ -355,13 +357,12 @@ export default function DashboardShowcase() {
   return (
     <section className={styles.section} id="dashboard">
       <div className={styles.header}>
-        <div className={styles.eyebrow}>Admin Dashboard</div>
+        <div className={styles.eyebrow}>{t("Dashboard Admin")}</div>
         <h2 className={styles.title}>
-          Kendali Penuh di <span className={styles.accent}>Ujung Jari.</span>
+          {t("Kendali Penuh di")} <span className={styles.accent}>{t("Ujung Jari.")}</span>
         </h2>
         <p className={styles.desc}>
-          Sistem manajemen terpusat untuk memantau metrik prototype, deal,
-          transaksi uji coba, dan pertumbuhan ekosistem Numpak secara efisien.
+          {t("Dashboard admin Numpak menyediakan ringkasan dan halaman untuk meninjau pengguna, outlet, produk, postingan, transaksi, dan deal.")}
         </p>
       </div>
 
@@ -394,15 +395,15 @@ export default function DashboardShowcase() {
             className={styles.tag}
             style={{ background: slide.accent + "22", color: slide.accent }}
           >
-            {slide.tag}
+            {t(slide.tag)}
           </div>
-          <h3 className={styles.slideTitle}>{slide.title}</h3>
-          <p className={styles.slideSubtitle}>{slide.subtitle}</p>
-          <p className={styles.slideDesc}>{slide.desc}</p>
+          <h3 className={styles.slideTitle}>{t(slide.title)}</h3>
+          <p className={styles.slideSubtitle}>{t(slide.subtitle)}</p>
+          <p className={styles.slideDesc}>{t(slide.desc)}</p>
           <ul className={styles.bullets}>
             {slide.bullets.map((b, i) => (
               <li key={i} className={styles.bullet}>
-                {b}
+                {t(b)}
               </li>
             ))}
           </ul>

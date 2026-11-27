@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Comfortaa } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "../lib/LanguageContext";
 
 const comfortaaHead = Comfortaa({
   subsets: ["latin"],
@@ -31,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className={comfortaaHead.variable + " " + comfortaaBody.variable}>
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );
